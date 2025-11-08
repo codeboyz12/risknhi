@@ -5,20 +5,20 @@ This is a simple web application using **Node.js + Express + SQLite** for the ba
 ---
 
 ## 🗂 Project Structure
-project/ <br>
-├── config/ <br>
-│ └──db.js # Setup file for database <br>
-├── controllers/ # Main function and logic of project <br>
-├── database/ <br>
-│ └── risknhiDB.sqlite # SQLite database (optional, created at runtime) <br>
-├── frontend/ # HTML resource  <br>
-│ └── index.html # Main HTML page <br>
-├── models/ # Function work directly with database <br>
-├── routes/ <br>
-│ └── pages.js # Route pages <br>
-├── package-lock.json <br>
-├── package.json <br>
-└── server.js # Entry point of the app <br>
+project/<br>
+├── config/<br>
+│ └──db.js # Setup file for database<br>
+├── controllers/ # Main function and logic of project<br>
+├── database/<br>
+│ └── risknhiDB.sqlite # SQLite database (optional, created at runtime)<br>
+├── frontend/ # HTML resource<br>
+│ └── index.html # Main HTML page<br>
+├── models/ # Function work directly with database<br>
+├── routes/<br>
+│ └── pages.js # Route pages<br>
+├── package-lock.json<br>
+├── package.json<br>
+└── server.js # Entry point of the app<br>
 
 ---
 
