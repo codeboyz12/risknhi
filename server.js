@@ -3,6 +3,7 @@ const path = require('path');
 const pages = require('./routes/pages');
 
 const app = express();
+const db = require('./config/db');
 const port = 8000;
 
 app.use(express.json());
