@@ -5,6 +5,7 @@ This is a simple web application using **Node.js + Express + SQLite** for the ba
 ---
 
 ## 🗂 Project Structure
+```
 project/<br>
 ├── config/<br>
 │ └──db.js # Setup file for database<br>
@@ -19,7 +20,7 @@ project/<br>
 ├── package-lock.json<br>
 ├── package.json<br>
 └── server.js # Entry point of the app<br>
-
+```
 ---
 
 ## ⚡ Installation and Running
