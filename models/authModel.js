@@ -19,7 +19,7 @@ exports.insert = (username, password) => {
 
 exports.selectAll = () => {
     return new Promise((resolve, reject) => {
-        db.get('SELECT * FROM auth', [],
+        db.all('SELECT * FROM auth', [],
             function (err, row) {
                 if (err) {
                     console.log(`[authModel] ${err}`);
