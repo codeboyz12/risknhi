@@ -1,7 +1,7 @@
 const db = require('../config/db');
 
 exports.insert = (userID, firstname, lastname) => {
-    return new Promise((resovle, reject) => {
+    return new Promise((resolve, reject) => {
         db.run(
             'INSERT INTO users (userID, firstname, lastname) VALUES (?, ?, ?)',
             [userID, firstname, lastname],
@@ -11,7 +11,7 @@ exports.insert = (userID, firstname, lastname) => {
                     reject(err);
                 } else {
                     console.log('[userModel] Created new users.');
-                    resovle(this.lastID);
+                    resolve(this.lastID);
                 }
             }
         );
