@@ -9,3 +9,11 @@ exports.index = (req, res) => {
 exports.second = (req, res) => {
     res.sendFile(path.join(frontendPath, 'second.html'));
 }
+
+exports.register = (req, res) => {
+    res.sendFile(path.join(frontendPath, 'register.html'));
+}
+
+exports.login = (req, res) => {
+    res.sendFile(path.join(frontendPath, 'login.html'));
+}

@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+html {
+    background: linear-gradient(to bottom, #003366, #301934) no-repeat;
+    height: 100%;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    margin: 30px 0px;
+}
+
+.header-text {
+    color: white;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 40px;
+}
+
+.text-input {
+    margin: 10px 0px;
+    background-color: transparent;
+    border: 1px solid white;
+    font-size: 12px;
+    padding: 10px 10px;
+    border-radius: 20px;
+    color: white;
+}
+
+.main-btn {
+    margin: 20px 0px;
+    background: linear-gradient(to right, #008080, #BBBBBB) no-repeat;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+}
+
+.incor-pass {
+    font-size: 10px;
+    color: red;
+    padding: 0px 10px;
+    display: none;
+}
+
+.register-link {
+    color: white;
+    font-size: 10px;
+}

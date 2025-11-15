@@ -13,6 +13,8 @@ app.use('/api', apiRoutes);
 
 app.get('/', pages.index);
 app.get('/second', pages.second);
+app.get('/register', pages.register);
+app.get('/login', pages.login);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
