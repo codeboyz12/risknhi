@@ -60,3 +60,15 @@ exports.login = async (req, res) => {
         });
     }
 }
+
+exports.logout = async (req, res) => {
+    const sessionId = req.cookies?.sessionId;
+
+    if (sessionId && sessions[sessionId]) {
+        delete sessions[sessionId];
+        res.clearCookie('sessionId');
+        return res.json({ success: true });
+    }
+
+    res.status(400).json({ success: false, message: "No active session" });
+};

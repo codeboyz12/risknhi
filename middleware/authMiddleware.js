@@ -1,4 +1,4 @@
-const {sessions} = require('../variable/variable');
+const sessions = require('../variable/variable');
 
 exports.requireLogin = (req, res, next) => {
     const sessionId = req.cookies?.sessionId;

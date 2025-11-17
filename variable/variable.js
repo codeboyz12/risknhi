@@ -1,1 +1,1 @@
-exports.sessions = {};
+module.exports = {};

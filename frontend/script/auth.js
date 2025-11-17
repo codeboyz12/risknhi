@@ -60,6 +60,7 @@ const login = async () => {
         } else {
             console.log(response.sessionId);
             localStorage.setItem("sessionId", response.sessionId);
+            window.location.href = "/";
         }
     }
 }
@@ -73,5 +74,19 @@ const checkpassword = () => {
         incorrectAlert.style.display = 'block';
     } else {
         incorrectAlert.style.display = 'none';
+    }
+}
+
+const logout = async () => {
+    const response = await fetch('/api/logout', {
+        method: 'POST',
+        credentials: 'include'   // สำคัญ! ให้ cookie ถูกส่งมาด้วย
+    }).then(r => r.json());
+
+    if (response.success) {
+        // redirect ไป login
+        window.location.href = '/login';
+    } else {
+        alert(response.message);
     }
 }
