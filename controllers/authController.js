@@ -16,7 +16,6 @@ exports.register = async (req, res) => {
 
 exports.getAllAuth = async (req, res) => {
     const row = await authModel.selectAll();
-    console.log(row);
     res.json(row);
 }
 

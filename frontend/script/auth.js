@@ -26,6 +26,26 @@ const register = async () => {
     }
 }
 
+const validateFields = async (element) => {
+    if (!element.value.trim()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+const login = async () => {
+    const usernameElement = document.getElementById("username");
+    const passwordElement = document.getElementById("password");
+
+    if (await validateFields(usernameElement) || await validateFields(passwordElement)){
+        alert("Please fill every field below.");
+    } else {
+        location.reload();
+    }
+
+}
+
 const checkpassword = () => {
     const password = document.getElementById("password");
     const confirmpassword = document.getElementById("confirmpassword");
