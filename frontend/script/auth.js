@@ -7,18 +7,18 @@ const register = async () => {
 
     if (password.value === confirmpassword.value) {
         console.log("Call fetch");
-        data = {
+        const payload = {
             "username": username.value,
             "password": password.value,
             "firstname": firstname.value,
             "lastname": lastname.value
         };
         const response = await fetch('http://localhost:8000/api/register', {
-            method: 'POST', // Specify the HTTP method
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json' // Indicate that the body is JSON
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data) // Convert the JavaScript object to a JSON string
+            body: JSON.stringify(payload)
         });
         console.log(response);
     } else {
@@ -41,9 +41,27 @@ const login = async () => {
     if (await validateFields(usernameElement) || await validateFields(passwordElement)){
         alert("Please fill every field below.");
     } else {
-        location.reload();
-    }
+        const payload = {
+            "username": usernameElement.value,
+            "password": passwordElement.value
+        }
+        const response = await fetch('http://localhost:8000/api/login', {
+            method: 'POST', 
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }).then( r => r.json());
 
+        if(!response.success) {
+            alert(response.message);
+            console.log("Login faild.");
+        } else {
+            console.log(response.sessionId);
+            localStorage.setItem("sessionId", response.sessionId);
+        }
+    }
 }
 
 const checkpassword = () => {

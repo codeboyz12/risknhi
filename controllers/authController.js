@@ -1,6 +1,8 @@
 const { json } = require('express');
 const authModel = require('../models/authModel');
 const userModel = require('../models/userModel');
+const crypto = require("crypto");
+const sessions = require('../variable/variable');
 
 exports.register = async (req, res) => {
     try {
@@ -31,14 +33,30 @@ exports.login = async (req, res) => {
     const row = await authModel.selectByUsername(username);
     if (!row) {
         console.log("Users not found");
-        res.send({"status": "Users not found"});
+        res.json({
+            success: false,
+            message: "Invalid Users."
+        });
+        return 1;
     }
 
     if (password == row.password) {
         console.log("Login success");
-        res.send({"status": "login success"});
+        const sessionId = crypto.randomBytes(16).toString("hex");
+        sessions[sessionId] = {
+            userId: row.userID,
+            created: Date.now()
+        };
+        console.log(sessions);
+        res.cookie("sessionId", sessionId, { httpOnly: true }).json({
+            success: true,
+            sessionId
+        });
     } else {
         console.log("Login unsuccess");
-        res.send({"status": "wrong password"});
+        res.json({
+            success: false,
+            message: "Invalid Password."
+        });
     }
 }
