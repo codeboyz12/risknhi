@@ -186,3 +186,107 @@ html {
 .sick-btn {
     margin-top: auto; /* ดันปุ่มลงล่างสุดถ้ามีพื้นที่เหลือ */
 }
+
+.nav-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 40px;
+}
+
+
+.page-title {
+    color: #AAA; /* สีเทาจางๆ ตามสไตล์ Dark Theme */
+    font-size: 16px;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+/* --- Center Layout for Sick Page --- */
+.center-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* ดันให้เนื้อหาอยู่กลางจอแนวตั้งถ้าพื้นที่เหลือ */
+    gap: 30px; /* ระยะห่างระหว่าง element */
+    padding-bottom: 50px; /* เว้นล่างเผื่อหน่อย */
+}
+
+/* --- Prompt Card (กล่องคำถาม) --- */
+.prompt-card {
+    background-color: white;
+    border-radius: 25px; /* มุมโค้งมากหน่อยตามรูปต้นแบบ */
+    padding: 20px 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+/* ตกแต่งติ่งคำพูด (Speech Bubble Tail) ให้ดูเหมือนรูป */
+.prompt-card::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+.prompt-card p {
+    color: #7B61FF; /* สีม่วงตามรูปต้นแบบ หรือใช้สีธีม #003366 ก็ได้ */
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* --- Custom Dropdown --- */
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+}
+
+.custom-select {
+    width: 100%;
+    appearance: none; /* ลบลูกศรเดิมของ Browser */
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 20px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* สร้างลูกศรเองเพื่อให้สวยงาม */
+.select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    pointer-events: none; /* ให้คลิกทะลุไปโดน select */
+    color: #7B61FF;
+    font-size: 12px;
+}
+
+/* --- Reuse Main Button --- */
+.main-btn {
+    /* สไตล์เดิมจากหน้าก่อนหน้า */
+    background: linear-gradient(to right, #008080, #BBBBBB) no-repeat;
+    color: white;
+    font-size: 18px;
+    padding: 12px 0;
+    border: none;
+    border-radius: 25px; /* ปรับให้โค้งมนขึ้น */
+    width: 100%;
+    max-width: 320px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.save-btn {
+    margin-top: 20px;
+}

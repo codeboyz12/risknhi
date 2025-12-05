@@ -16,3 +16,7 @@ exports.register = (req, res) => {
 exports.login = (req, res) => {
     res.sendFile(path.join(frontendPath, 'login.html'));
 }
+
+exports.sickreccord = (req, res) => {
+    res.sendFile(path.join(frontendPath, 'sick_reccord.html'));
+}
