@@ -1,15 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RISKNHI UI</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <center>
-        <h1>
-            This seconde page
-        </h1>
-    </center>
+
+    <div class="app-container">
+        <header class="main-header">
+            <div class="top-nav">
+                <div class="spacer"></div> <a href="#" class="logout-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </div>
+            
+            <div class="logo-section">
+                <div class="logo-icon">
+                    👤 </div>
+                <h1 class="brand-name">RISKNHI</h1>
+            </div>
+            
+            <p class="tagline">Stay away from illness, care for others.</p>
+        </header>
+
+        <main class="content-area">
+            
+            <div class="card status-card">
+                <div class="status-item">
+                    <span class="icon pin">📍</span>
+                    <span class="text">อาคารเรียนรวม 2</span>
+                </div>
+                <div class="status-item">
+                    <span class="icon pulse">💓</span>
+                    <span class="text">สบายดี</span>
+                </div>
+                <div class="status-item">
+                    <span class="icon dot yellow">●</span>
+                    <span class="text">ปานกลาง</span>
+                </div>
+            </div>
+
+            <div class="card nearby-card">
+                <h2 class="card-title">Nearby</h2>
+                
+                <div class="table-header">
+                    <div class="col col-1">อาคาร</div>
+                    <div class="col col-2">จำนวนผู้ป่วย</div>
+                    <div class="col col-3">ความเสี่ยง</div>
+                </div>
+
+                <div class="table-body">
+                    <div class="table-row">
+                        <div class="col col-1">อาคารเรียนรวม 1</div>
+                        <div class="col col-2">20</div>
+                        <div class="col col-3 text-red">สูง</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col col-1">LX</div>
+                        <div class="col col-2">12</div>
+                        <div class="col col-3 text-yellow">ปานกลาง</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col col-1">N7</div>
+                        <div class="col col-2">4</div>
+                        <div class="col col-3 text-green">ต่ำ</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col col-1">N4</div>
+                        <div class="col col-2">3</div>
+                        <div class="col col-3 text-green">ต่ำ</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="main-btn sick-btn">I'm sick</button>
+
+        </main>
+    </div>
+
 </body>
 </html>
