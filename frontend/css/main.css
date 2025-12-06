@@ -1,8 +1,7 @@
-/* =========================================
-   1. VARIABLES & RESET
-   ========================================= */
+/*  =========================================
+    1. VARIABLES & RESET (Merged)
+    ========================================= */
 :root {
-    /* Color Palette - แก้สีตรงนี้ที่เดียวจบ */
     --primary-gradient: linear-gradient(to bottom, #003366, #301934);
     --brand-gradient: linear-gradient(to right, #2196F3, #4CAF50);
     --btn-gradient: linear-gradient(to right, #008080, #BBBBBB);
@@ -12,20 +11,24 @@
     --text-muted: #aaaaaa;
 
     --bg-card: #FFE5E5;
-    --bg-input: rgba(255, 255, 255, 0.1);
+    --bg-input: rgba(255, 255, 255, 0.05);
 
     --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.2);
 
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
     --radius-md: 20px;
-    --radius-lg: 25px;
+    --radius-lg: 30px;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', 'Sarabun', 'Segoe UI', sans-serif;
 }
 
 html {
@@ -35,23 +38,31 @@ html {
 
 body {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
     color: var(--text-main);
     text-decoration: none;
+    transition: 0.3s;
+    font-weight: bold;
 }
 
-/* =========================================
-   2. LAYOUT & CONTAINERS
-   ========================================= */
+a:hover {
+    color: #81c784;
+    text-shadow: 0 0 5px rgba(129, 199, 132, 0.5);
+}
+
+/*  =========================================
+    2. LAYOUT & CONTAINERS
+    ========================================= */
 .app-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     width: 100%;
     max-width: 450px;
-    /* Mobile View Simulation */
     margin: 0 auto;
     padding: 20px;
 }
@@ -66,20 +77,24 @@ a {
     padding-bottom: 50px;
 }
 
-/* =========================================
-   3. HEADER & NAVIGATION
-   ========================================= */
+/*  =========================================
+    3. HEADER & NAVIGATION
+    ========================================= */
 header {
     width: 100%;
     text-align: center;
     margin: 20px 0;
     padding: 10px 0;
+    animation: fadeIn 0.8s ease-out;
 }
 
 .header-text {
     color: var(--text-main);
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 32px;
+    /* ปรับขนาดตามชุดที่ 1 */
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .main-header {
@@ -87,7 +102,6 @@ header {
     margin-bottom: 20px;
 }
 
-/* Top Navigation Bar */
 .top-nav {
     display: flex;
     justify-content: flex-end;
@@ -110,9 +124,9 @@ header {
     margin-left: 10px;
 }
 
-/* =========================================
-   4. BRANDING (LOGO)
-   ========================================= */
+/*  =========================================
+    4. BRANDING (LOGO)
+    ========================================= */
 .logo-section {
     display: flex;
     flex-direction: column;
@@ -127,7 +141,6 @@ header {
     width: 60px;
     height: 60px;
     margin-bottom: 5px;
-
     background-color: #4CAF50;
     color: var(--text-main);
     border-radius: 50%;
@@ -151,52 +164,85 @@ header {
     opacity: 0.8;
 }
 
-/* =========================================
-   5. FORMS & INPUTS
-   ========================================= */
+/*  =========================================
+    5. FORMS & INPUTS (Merged: Glass Style)
+    ========================================= */
 .register-form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0 40px;
+    padding: 40px 30px;
+
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--glass-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glass-shadow);
+
+    animation: fadeIn 1s ease-out;
+}
+
+.form-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    z-index: 10;
 }
 
 .text-input {
     width: 100%;
-    margin: 10px 0;
-    padding: 15px;
+    padding: 12px 15px 12px 45px;
 
-    background-color: var(--bg-input);
-    /* Glass effect */
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: var(--radius-md);
+    background: var(--bg-input);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
 
     color: var(--text-main);
-    font-size: 14px;
+    font-size: 15px;
     outline: none;
+    transition: all 0.3s ease;
 }
 
 .text-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.text-input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #4CAF50;
+    /* ใช้สีเขียวตอน Focus ตามชุดที่ 1 เพื่อความเด่น */
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
 }
 
 .incor-pass {
     display: none;
-    /* Hidden by default */
-    margin-bottom: 5px;
-    padding: 0 10px;
+    margin-bottom: 15px;
+    padding-left: 10px;
     color: #ff6b6b;
-    font-size: 12px;
+    font-size: 13px;
+    text-align: left;
+    font-weight: 500;
+    animation: shake 0.3s ease-in-out;
 }
 
 .register-link {
-    margin-top: 10px;
+    margin-top: 25px;
     text-align: center;
-    font-size: 12px;
-    color: var(--text-main);
+    font-size: 14px;
+    color: var(--text-muted);
 }
 
-/* Custom Select Dropdown */
 .input-wrapper {
     position: relative;
     width: 100%;
@@ -206,15 +252,12 @@ header {
 .custom-select {
     width: 100%;
     padding: 15px 20px;
-
     appearance: none;
     -webkit-appearance: none;
-
     background-color: white;
     border: none;
     border-radius: 15px;
     box-shadow: var(--shadow-md);
-
     color: var(--text-dark);
     font-size: 16px;
     cursor: pointer;
@@ -231,9 +274,9 @@ header {
     font-size: 12px;
 }
 
-/* =========================================
-   6. CARDS & COMPONENTS
-   ========================================= */
+/*  =========================================
+    6. CARDS & COMPONENTS (คงเดิม)
+    ========================================= */
 .card {
     padding: 20px;
     margin-bottom: 20px;
@@ -242,7 +285,6 @@ header {
     box-shadow: var(--shadow-sm);
 }
 
-/* Prompt Card (Sick Page) */
 .prompt-card {
     position: relative;
     padding: 20px 40px;
@@ -252,7 +294,6 @@ header {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Triangle indicator for Prompt Card */
 .prompt-card::after {
     content: '';
     position: absolute;
@@ -271,7 +312,6 @@ header {
     text-align: center;
 }
 
-/* Status Card Items */
 .status-card {
     display: flex;
     flex-direction: column;
@@ -287,7 +327,6 @@ header {
     font-weight: bold;
 }
 
-/* Icons within Status */
 .icon {
     width: 20px;
     text-align: center;
@@ -307,7 +346,6 @@ header {
     font-size: 18px;
 }
 
-/* Nearby Card */
 .nearby-card {
     display: flex;
     flex-direction: column;
@@ -324,10 +362,9 @@ header {
     text-align: center;
 }
 
-/* =========================================
-   7. TABLES (Flex-based)
-   ========================================= */
-/* Adapters for responsive/flex table structure */
+/*  =========================================
+    7. TABLES (คงเดิม)
+    ========================================= */
 thead,
 tbody {
     display: block;
@@ -356,7 +393,6 @@ tr {
     font-weight: bold;
 }
 
-/* Columns */
 .col {
     flex: 1;
     text-align: center;
@@ -377,7 +413,6 @@ tr {
     border-right: none;
 }
 
-/* Status Text Colors */
 .text-red {
     color: #D32F2F;
 }
@@ -390,29 +425,38 @@ tr {
     color: #388E3C;
 }
 
-/* =========================================
-   8. BUTTONS
-   ========================================= */
+/*  =========================================
+    8. BUTTONS (Merged)
+    ========================================= */
 .main-btn {
     display: block;
     width: 100%;
-    max-width: 320px;
-    margin: 20px auto;
-    padding: 12px 0;
+    margin-top: 10px;
+    padding: 14px 0;
 
-    background: var(--btn-gradient) no-repeat;
+    /* ใช้สีเดิม (Teal/Grey) ตามที่ขอ */
+    background: var(--btn-gradient);
     border: none;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
 
-    color: var(--text-main);
-    font-size: 18px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.main-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .main-btn:active {
-    transform: scale(0.98);
+    transform: translateY(0);
 }
 
 .sick-btn {
@@ -423,14 +467,33 @@ tr {
     margin-top: 20px;
 }
 
+/*  =========================================
+    9. ANIMATIONS
+    ========================================= */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(20px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
     }
 }
