@@ -11,12 +11,16 @@
     <header>
         <h2 class="header-text">Welcome to RISKNHI</h2>
     </header>
-    <main class="register-form">
-        <input type="text" class="text-input" placeholder="Username" id="username">
-        <input type="password" class="text-input" placeholder="Password" id="password">
-        <label class="incor-pass" id="incorrectAlert">Incorrect password</label>
-        <button class="main-btn" onclick="login()">Login</button>
-        <p class="register-link">Don't have an account? <u><a href="/register">Sign up now.</a></u></p>
+    <main>
+        <section class="register-form">
+            <form>
+                <input type="text" class="text-input" placeholder="Username" id="username">
+                <input type="password" class="text-input" placeholder="Password" id="password">
+                <label class="incor-pass" id="incorrectAlert">Incorrect password</label>
+                <button class="main-btn" onclick="login()">Login</button>
+            </form>
+            <p class="register-link">Don't have an account? <u><a href="/register">Sign up now.</a></u></p>
+        </section>
     </main>
 </body>
 </html>
