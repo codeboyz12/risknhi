@@ -5,6 +5,11 @@ const register = async () => {
     const password = document.getElementById("password");
     const confirmpassword = document.getElementById("confirmpassword");
 
+    if (await validateFields(username)){ alert("Username are require!"); return;}
+    if (await validateFields(firstname)){ alert("Firstname are require!"); return;}
+    if (await validateFields(lastname)){ alert("Lastname are require!"); return;}
+    if (await validateFields(password) || await validateFields(confirmpassword)){ alert("Password are require!"); return;}
+
     if (password.value === confirmpassword.value) {
         console.log("Call fetch");
         const payload = {
@@ -19,8 +24,12 @@ const register = async () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
-        });
-        console.log(response);
+        }).then( r => r.json() );
+        if (response.success) {
+            window.location.href = "/";
+        } else {
+            alert("Register fail");
+        }
     } else {
         alert("Incorrect password");
     }
@@ -52,7 +61,7 @@ const login = async () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
-        }).then( r => r.json());
+        }).then( r => r.json() );
 
         if(!response.success) {
             alert(response.message);
