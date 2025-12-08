@@ -1,15 +1,15 @@
 const db = require('../config/db');
 
-exports.insert = (building_name, total_floor) => {
+exports.insert = (userID, buildingID, floor_number) => {
     return new Promise((resolve, reject) => {
-        db.run('INSERT INTO patient (userID, buildingID, floor_number) VALUES (?, ? )',
-            [building_name, total_floor],
+        db.run('INSERT INTO patient (userID, buildingID, floor_number) VALUES (?, ?, ?)',
+            [userID, buildingID, floor_number],
             function (err) {
                 if (err) {
-                    console.log(`[buildingModel] ${err}`);
+                    console.log(`[patientModel] ${err}`);
                     reject(err);
                 } else {
-                    console.log(`[buildingModel] Created new buiding`);
+                    console.log(`[patientModel] Created new patient`);
                     resolve(this.lastID);
                 }
             }
@@ -19,13 +19,13 @@ exports.insert = (building_name, total_floor) => {
 
 exports.selectAll = () => {
     return new Promise((resolve, reject) => {
-        db.all('SELECT * FROM building', [],
+        db.all('SELECT * FROM patient', [],
             function (err, row) {
                 if (err) {
-                    console.log(`[buildingModel] ${err}`);
+                    console.log(`[patientModel] ${err}`);
                     reject(err);
                 } else {
-                    console.log(`[buildingModel] Return all rows`);
+                    console.log(`[patientModel] Return all rows`);
                     resolve(row);
                 }
             }
