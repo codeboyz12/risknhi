@@ -30,19 +30,22 @@ const authTable = `
 
 const buildingTable = `
     CREATE TABLE IF NOT EXISTS building (
-      buildingID INTEGER PRIMARY KEY,
-      building_name VARCHAR(255)
+        buildingID INTEGER PRIMARY KEY AUTOINCREMENT,
+        building_name VARCHAR(255) NOT NULL,
+        total_floor INTEGER(2) NOT NULL
     )
 `;
 
 const patientTable = `
     CREATE TABLE IF NOT EXISTS patient (
-      userID INTEGER NOT NULL,
-      buildingID INTEGER NOT NULL,
-      stillsick BOOLEAN NOT NULL,
-      time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (userID) REFERENCES USERS(userID),
-      FOREIGN KEY (buildingID) REFERENCES BUILDING(buildingID)
+        patientID INTEGER PRIMARY KEY AUTOINCREMENT,
+        userID INTEGER NOT NULL,
+        buildingID INTEGER NOT NULL,
+        floor_number INTEGER NOT NULL CHECK (floor_number BETWEEN 1 AND 99),
+        stillsick BOOLEAN NOT NULL DEFAULT true,
+        time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (userID) REFERENCES USERS(userID),
+        FOREIGN KEY (buildingID) REFERENCES BUILDING(buildingID)
     )
 `;
 
