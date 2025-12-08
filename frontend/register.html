@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,39 @@
     <script src="script/auth.js"></script>
     <title>Register</title>
 </head>
+
 <body>
     <header>
         <h2 class="header-text">Welcome to RISKNHI</h2>
     </header>
-    <main class="register-form">
-        <input type="text" class="text-input" placeholder="Username" id="username">
-        <input type="text" class="text-input" placeholder="Firstname" id="firstname">
-        <input type="text" class="text-input" placeholder="Lastname" id="lastname">
-        <input type="password" class="text-input" placeholder="Password" id="password">
-        <input type="password" class="text-input" placeholder="Confirm password" id="confirmpassword" oninput="checkpassword()">
-        <label class="incor-pass" id="incorrectAlert">Incorrect password</label>
-        <button class="main-btn" onclick="register()">Sing in</button>
+    <main>
+        <section class="register-form">
+            <!-- <form> -->
+                <div class="form-group">
+                    <input type="text" class="text-input" placeholder="Username" id="username">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="text-input" placeholder="Firstname" id="firstname">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="text-input" placeholder="Lastname" id="lastname">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="text-input" placeholder="Password" id="password">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="text-input" placeholder="Confirm password" id="confirmpassword" oninput="checkpassword()">
+                </div>
+                
+                <label class="incor-pass" id="incorrectAlert">Incorrect password</label>
+                <button class="main-btn" onclick="register()">Sign in</button>
+            <!-- </form> -->
+        </section>
     </main>
 </body>
+
 </html>

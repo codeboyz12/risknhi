@@ -1,31 +1,102 @@
-/* --- โค้ดเดิมของคุณ --- */
+/*  =========================================
+    1. VARIABLES & RESET (Merged)
+    ========================================= */
+:root {
+    --primary-gradient: linear-gradient(to bottom, #003366, #301934);
+    --brand-gradient: linear-gradient(to right, #2196F3, #4CAF50);
+    --btn-gradient: linear-gradient(to right, #008080, #BBBBBB);
+
+    --text-main: #ffffff;
+    --text-dark: #333333;
+    --text-muted: #aaaaaa;
+
+    --bg-card: #FFE5E5;
+    --bg-input: rgba(255, 255, 255, 0.05);
+
+    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+    --radius-md: 20px;
+    --radius-lg: 30px;
+}
+
 * {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
-    box-sizing: border-box; /* แนะนำให้เพิ่มเพื่อให้จัดการ padding ง่ายขึ้น */
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Sarabun', 'Segoe UI', sans-serif;
 }
 
 html {
-    /* เพิ่ม fixed เพื่อล็อกพื้นหลังให้เต็มจอตลอดเวลาแม้จะเลื่อนหน้า */
-    background: linear-gradient(to bottom, #003366, #301934) no-repeat fixed; 
-    
-    /* เปลี่ยนจาก height เป็น min-height เพื่อให้ยืดตามเนื้อหาได้ถ้ายาวเกินจอ */
-    min-height: 100%; 
+    background: var(--primary-gradient) no-repeat fixed;
+    min-height: 100%;
 }
 
-/* --- ส่วนที่ปรับปรุงและเขียนเพิ่ม --- */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
-/* จัด Layout หลัก */
+a {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #81c784;
+    text-shadow: 0 0 5px rgba(129, 199, 132, 0.5);
+}
+
+/*  =========================================
+    2. LAYOUT & CONTAINERS
+    ========================================= */
 .app-container {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    max-width: 450px; /* จำกัดความกว้างเหมือนจอมือถือ */
+    min-height: 100vh;
+    width: 100%;
+    max-width: 450px;
     margin: 0 auto;
+    padding: 20px;
 }
 
-/* Header Section */
+.center-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 30px;
+    padding-bottom: 50px;
+}
+
+/*  =========================================
+    3. HEADER & NAVIGATION
+    ========================================= */
+header {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px 0;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.header-text {
+    color: var(--text-main);
+    font-size: 32px;
+    /* ปรับขนาดตามชุดที่ 1 */
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
 .main-header {
     text-align: center;
     margin-bottom: 20px;
@@ -37,6 +108,25 @@ html {
     margin-bottom: 10px;
 }
 
+.nav-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 10px 0;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.page-title {
+    color: var(--text-muted);
+    font-size: 16px;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+/*  =========================================
+    4. BRANDING (LOGO)
+    ========================================= */
 .logo-section {
     display: flex;
     flex-direction: column;
@@ -45,184 +135,165 @@ html {
 }
 
 .logo-icon {
-    /* จำลอง Logo วงกลมเขียว */
-    width: 60px;
-    height: 60px;
-    background-color: #4CAF50; /* สีเขียว */
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
-    border-bottom: 5px solid #FF5722; /* สีส้มด้านล่าง */
+    width: 60px;
+    height: 60px;
     margin-bottom: 5px;
+    background-color: #4CAF50;
+    color: var(--text-main);
+    border-radius: 50%;
+    border-bottom: 5px solid #FF5722;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 30px;
 }
 
 .brand-name {
     font-size: 24px;
     font-weight: bold;
-    /* ไล่สีตัวอักษร RISKNHI */
-    background: linear-gradient(to right, #2196F3, #4CAF50);
+    background: var(--brand-gradient);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
+    -webkit-text-fill-color: transparent;
 }
 
 .tagline {
-    color: white;
+    color: var(--text-main);
     font-size: 14px;
     margin-top: 5px;
+    opacity: 0.8;
 }
 
-/* Common Card Style */
+/*  =========================================
+    5. FORMS & INPUTS (Merged: Glass Style)
+    ========================================= */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 40px 30px;
+
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--glass-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glass-shadow);
+
+    animation: fadeIn 1s ease-out;
+}
+
+.form-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.text-input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+
+    background: var(--bg-input);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+
+    color: var(--text-main);
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.text-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.text-input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #4CAF50;
+    /* ใช้สีเขียวตอน Focus ตามชุดที่ 1 เพื่อความเด่น */
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.incor-pass {
+    display: none;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    color: #ff6b6b;
+    font-size: 13px;
+    text-align: left;
+    font-weight: 500;
+    animation: shake 0.3s ease-in-out;
+}
+
+.register-link {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+}
+
+.custom-select {
+    width: 100%;
+    padding: 15px 20px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    box-shadow: var(--shadow-md);
+    color: var(--text-dark);
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+.select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #7B61FF;
+    font-size: 12px;
+}
+
+/*  =========================================
+    6. CARDS & COMPONENTS (คงเดิม)
+    ========================================= */
 .card {
-    background-color: #FFE5E5; /* สีพื้นหลังชมพูอ่อน */
-    border-radius: 20px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: var(--bg-card);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
 }
 
-/* Card 1: Status */
-.status-card {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* ระยะห่างระหว่างบรรทัด */
-}
-
-.status-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 14px;
-    color: #333;
-    font-weight: bold;
-}
-
-.icon {
-    width: 20px; 
-    text-align: center;
-}
-.icon.pin { color: #512DA8; }
-.icon.pulse { color: #512DA8; font-size: 18px;}
-.icon.dot.yellow { color: #FFC107; font-size: 18px;}
-
-/* Card 2: Nearby Table (ทำด้วย Flexbox) */
-.nearby-card {
-    padding: 0; /* ล้าง padding เพื่อให้หัวตารางชนขอบ */
-    overflow: hidden; /* ตัดมุมโค้งให้เนื้อหาข้างใน */
-    display: flex;
-    flex-direction: column;
-}
-
-.card-title {
-    text-align: center;
-    padding: 15px 0;
-    font-size: 18px;
-    color: #000;
-    background-color: #FFE5E5;
-    border-bottom: 1px solid #333;
-}
-
-.table-header, .table-row {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-}
-
-.table-header {
-    font-weight: bold;
-    font-size: 14px;
-    border-bottom: 1px solid #999;
-}
-
-.table-row {
-    font-size: 12px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Column Management */
-.col {
-    text-align: center;
-    flex: 1; /* แบ่งพื้นที่เท่าๆ กัน */
-}
-
-.col-1 { 
-    flex: 1.5; /* คอลัมน์แรกกว้างกว่านิดหน่อย */
-    text-align: left; /* จัดชิดซ้าย */
-    padding-left: 20px;
-    border-right: 1px solid #999;
-}
-.col-2 {
-    border-right: 1px solid #999;
-}
-/* ลบเส้นขอบขวาสุดของคอลัมน์สุดท้าย */
-.col:last-child {
-    border-right: none;
-}
-
-/* Text Colors for Risk Level */
-.text-red { color: #D32F2F; }
-.text-yellow { color: #FBC02D; }
-.text-green { color: #388E3C; }
-
-/* Main Button (Reuse & Extend) */
-.main-btn {
-    /* สไตล์เดิมของคุณ */
-    margin: 20px 0px;
-    background: linear-gradient(to right, #008080, #BBBBBB) no-repeat;
-    color: white;
-    font-size: 18px;
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-    
-    /* เพิ่มเติม */
-    width: 100%;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.sick-btn {
-    margin-top: auto; /* ดันปุ่มลงล่างสุดถ้ามีพื้นที่เหลือ */
-}
-
-.nav-header {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    margin-bottom: 40px;
-}
-
-
-.page-title {
-    color: #AAA; /* สีเทาจางๆ ตามสไตล์ Dark Theme */
-    font-size: 16px;
-    font-weight: normal;
-    margin-left: 10px;
-}
-
-/* --- Center Layout for Sick Page --- */
-.center-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1; /* ดันให้เนื้อหาอยู่กลางจอแนวตั้งถ้าพื้นที่เหลือ */
-    gap: 30px; /* ระยะห่างระหว่าง element */
-    padding-bottom: 50px; /* เว้นล่างเผื่อหน่อย */
-}
-
-/* --- Prompt Card (กล่องคำถาม) --- */
 .prompt-card {
-    background-color: white;
-    border-radius: 25px; /* มุมโค้งมากหน่อยตามรูปต้นแบบ */
-    padding: 20px 40px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     position: relative;
+    padding: 20px 40px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ตกแต่งติ่งคำพูด (Speech Bubble Tail) ให้ดูเหมือนรูป */
 .prompt-card::after {
     content: '';
     position: absolute;
@@ -235,58 +306,194 @@ html {
 }
 
 .prompt-card p {
-    color: #7B61FF; /* สีม่วงตามรูปต้นแบบ หรือใช้สีธีม #003366 ก็ได้ */
+    color: #7B61FF;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
 }
 
-/* --- Custom Dropdown --- */
-.input-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 320px;
+.status-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.custom-select {
-    width: 100%;
-    appearance: none; /* ลบลูกศรเดิมของ Browser */
-    background-color: white;
-    border: none;
-    border-radius: 15px;
-    padding: 15px 20px;
-    font-size: 16px;
-    color: #333;
-    outline: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: bold;
 }
 
-/* สร้างลูกศรเองเพื่อให้สวยงาม */
-.select-arrow {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    pointer-events: none; /* ให้คลิกทะลุไปโดน select */
-    color: #7B61FF;
-    font-size: 12px;
+.icon {
+    width: 20px;
+    text-align: center;
 }
 
-/* --- Reuse Main Button --- */
-.main-btn {
-    /* สไตล์เดิมจากหน้าก่อนหน้า */
-    background: linear-gradient(to right, #008080, #BBBBBB) no-repeat;
-    color: white;
+.icon.pin {
+    color: #512DA8;
+}
+
+.icon.pulse {
+    color: #512DA8;
     font-size: 18px;
-    padding: 12px 0;
-    border: none;
-    border-radius: 25px; /* ปรับให้โค้งมนขึ้น */
+}
+
+.icon.dot.yellow {
+    color: #FFC107;
+    font-size: 18px;
+}
+
+.nearby-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+}
+
+.card-title {
+    padding: 15px 0;
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--text-dark);
+    color: #000;
+    font-size: 18px;
+    text-align: center;
+}
+
+/*  =========================================
+    7. TABLES (คงเดิม)
+    ========================================= */
+thead,
+tbody {
+    display: block;
     width: 100%;
-    max-width: 320px;
+}
+
+tr {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.table-header {
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid #999;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.table-row {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    color: var(--text-dark);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.col {
+    flex: 1;
+    text-align: center;
+}
+
+.col-1 {
+    flex: 1.5;
+    padding-left: 20px;
+    text-align: left;
+    border-right: 1px solid #999;
+}
+
+.col-2 {
+    border-right: 1px solid #999;
+}
+
+.col:last-child {
+    border-right: none;
+}
+
+.text-red {
+    color: #D32F2F;
+}
+
+.text-yellow {
+    color: #FBC02D;
+}
+
+.text-green {
+    color: #388E3C;
+}
+
+/*  =========================================
+    8. BUTTONS (Merged)
+    ========================================= */
+.main-btn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px 0;
+
+    /* ใช้สีเดิม (Teal/Grey) ตามที่ขอ */
+    background: var(--btn-gradient);
+    border: none;
+    border-radius: var(--radius-lg);
+
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.main-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.main-btn:active {
+    transform: translateY(0);
+}
+
+.sick-btn {
+    margin-top: auto;
 }
 
 .save-btn {
     margin-top: 20px;
+}
+
+/*  =========================================
+    9. ANIMATIONS
+    ========================================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
 }

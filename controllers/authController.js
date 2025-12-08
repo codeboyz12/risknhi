@@ -10,8 +10,15 @@ exports.register = async (req, res) => {
         const userID = await authModel.insert(username, password);
         await userModel.insert(userID, firstname, lastname);
 
+        res.json({
+            success: true,
+            userId: userID
+        });
         return userID;
     } catch (err) {
+        res.json({
+            success: false,
+        });
         console.log(`Register error ${err}`);
     }
 }
