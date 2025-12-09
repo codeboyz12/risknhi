@@ -1,9 +1,11 @@
 const { json } = require('express');
 const patientModel = require('../models/patientModel');
+const sessions = require('../variable/variable');
 
 exports.addPatient = async (req, res) => {
     try {
-        const {userID, buildingID, floor_number} = req.body;
+        const {session, buildingID, floor_number} = req.body;
+        const userID = sessions[session].userId;
         const patientId = await patientModel.insert(userID, buildingID, floor_number);
 
         res.json({

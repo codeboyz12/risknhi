@@ -21,5 +21,8 @@ exports.addBuilding = async (req, res) => {
 
 exports.getAllBuild = async (req, res) => {
     const row = await buildingModel.selectAll();
-    res.json(row);
+    res.json({
+        success: true,
+        data: row
+    });
 }
