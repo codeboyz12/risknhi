@@ -86,7 +86,7 @@
                 </table>
             </section>
 
-            <button class="main-btn sick-btn">I'm sick</button>
+            <button class="main-btn sick-btn" id="imSick">I'm sick</button>
 
         </main>
     </div>
@@ -94,3 +94,9 @@
 </body>
 
 </html>
+
+<script>
+    document.getElementById("imSick").addEventListener("click", () => {
+        window.location.href = '/sickreccord';
+    })
+</script>
