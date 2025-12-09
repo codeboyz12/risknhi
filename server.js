@@ -15,7 +15,6 @@ app.use('/api', apiRoutes);
 
 // app.get('/', requireLogin, pages.index); // Version require login before acess
 app.get('/', pages.index); // Version for production
-app.get('/second', pages.second);
 app.get('/register', pages.register);
 app.get('/login', pages.login);
 app.get('/sickreccord', requireLogin, pages.sickreccord);
