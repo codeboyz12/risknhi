@@ -78,10 +78,9 @@ async function addPatientRecord() {
             body: JSON.stringify(payload)
         }).then(r => r.json());
 
-        console.log("ผลลัพธ์จาก backend:", response);
-
         if (response.success) {
             alert("บันทึกข้อมูลสำเร็จ!");
+            window.location.href = '/';
         } else {
             alert("บันทึกไม่สำเร็จ: " + (response.message || "Error"));
         }
