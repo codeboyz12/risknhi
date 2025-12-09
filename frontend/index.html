@@ -14,7 +14,7 @@
         <header class="main-header">
             <nav class="top-nav">
                 <div class="spacer"></div>
-                <a href="#" class="logout-icon">
+                <a href="#" class="logout-icon" aria-label="Logout">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -89,6 +89,45 @@
             <button class="main-btn sick-btn" id="imSick">I'm sick</button>
 
         </main>
+    </div>
+
+    <div id="sickStatusPopup" class="modal-overlay" role="dialog" aria-modal="true"
+        aria-labelledby="popup-title">
+    
+        <div class="modal-content">
+            <h3 id="popup-title" class="modal-title">สวัสดี! ยังรู้สึกป่วยอยู่ไหม?</h3>
+    
+            <div class="status-btn-group">
+                <button class="status-btn btn-red">
+                    <div class="btn-text">
+                        <strong>ใช่, ยังป่วย</strong>
+                        <small>บันทึกอาการต่อเนื่อง</small>
+                    </div>
+                </button>
+    
+                <button class="status-btn btn-green">
+                    <div class="btn-text">
+                        <strong>ไม่, หายดีแล้ว</strong>
+                        <small>ยืนยันสุขภาพ</small>
+                    </div>
+                </button>
+            </div>
+    
+            <fieldset class="location-section">
+                <legend class="location-label">ตอนนี้คุณอยู่ที่ไหน?</legend>
+                <div class="popup-input-wrapper">
+                    <select id="buildingSelect" class="custom-select popup-select" aria-label="เลือกอาคาร">
+                        <option value="" disabled selected>เลือกสถานที่</option>
+                    </select>
+    
+                    <select id="floorSelect" class="custom-select popup-select" aria-label="เลือกชั้น">
+                        <option value="" disabled selected>เลือกชั้น</option>
+                    </select>
+    
+                    <button class="main-btn confirm-btn">ยืนยัน</button>
+                </div>
+            </fieldset>
+        </div>
     </div>
 
 </body>
