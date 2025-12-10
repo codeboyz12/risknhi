@@ -10,37 +10,38 @@
 </head>
 
 <body>
-    <header>
-        <h2 class="header-text">Welcome to RISKNHI</h2>
-    </header>
-    <main>
-        <section class="register-form">
-            <!-- <form> -->
-                <div class="form-group">
-                    <input type="text" class="text-input" placeholder="Username" id="username">
-                </div>
-
-                <div class="form-group">
-                    <input type="text" class="text-input" placeholder="Firstname" id="firstname">
-                </div>
-
-                <div class="form-group">
-                    <input type="text" class="text-input" placeholder="Lastname" id="lastname">
-                </div>
-
-                <div class="form-group">
-                    <input type="password" class="text-input" placeholder="Password" id="password">
-                </div>
-
-                <div class="form-group">
-                    <input type="password" class="text-input" placeholder="Confirm password" id="confirmpassword" oninput="checkpassword()">
-                </div>
-                
-                <label class="incor-pass" id="incorrectAlert">Incorrect password</label>
-                <button class="main-btn" onclick="register()">Sign in</button>
-            <!-- </form> -->
-        </section>
-    </main>
+    <div class="center-layout">
+        <header>
+            <h2 class="header-text">Welcome to RISKNHI</h2>
+        </header>
+        <main>
+            <section class="register-form">
+                <!-- <form> -->
+                    <div class="form-group">
+                        <input type="text" class="text-input" placeholder="Username" id="username">
+                    </div>
+    
+                    <div class="form-group">
+                        <input type="text" class="text-input" placeholder="Firstname" id="firstname">
+                    </div>
+    
+                    <div class="form-group">
+                        <input type="text" class="text-input" placeholder="Lastname" id="lastname">
+                    </div>
+    
+                    <div class="form-group">
+                        <input type="password" class="text-input" placeholder="Password" id="password">
+                    </div>
+    
+                    <div class="form-group">
+                        <input type="password" class="text-input" placeholder="Confirm password" id="confirmpassword" oninput="checkpassword()">
+                    </div>
+                    
+                    <label class="incor-pass" id="incorrectAlert">Incorrect password</label>
+                    <button class="main-btn" onclick="register()">Sign in</button>
+            </section>
+        </main>
+    </div>
 </body>
 
 </html>
