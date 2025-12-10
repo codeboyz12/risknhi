@@ -179,14 +179,9 @@ header {
     flex-direction: column;
     justify-self: center;
     width: 100%;
-
-    /* [EDIT] ขยายความกว้างเป็น 550px เพื่อให้ดูใหญ่ขึ้น เต็มตาขึ้น (เดิม 450px) */
     max-width: 550px;
     margin: 0 auto;
-
-    /* [EDIT] เพิ่ม Padding ด้านในให้ดูโปร่งขึ้น (เดิม 40px 30px) */
     padding: 50px 40px;
-
     background: var(--glass-bg);
     border: var(--glass-border);
     border-radius: var(--radius-md);
@@ -195,7 +190,6 @@ header {
 }
 
 .register-form.login-card {
-    /* ขยายความกว้างเฉพาะหน้า Register ให้กว้างกว่า Login นิดนึงเพราะช่องเยอะ */
     max-width: 450px !important;
 }
 
@@ -669,8 +663,6 @@ tr {
 /* =========================================
    11. LOGIN PAGE SPECIFIC STYLES
    ========================================= */
-
-/* จัด Layout ให้อยู่ตรงกลางเสมอในมือถือ */
 .login-layout {
     display: flex;
     flex-direction: column;
@@ -681,7 +673,6 @@ tr {
     padding-bottom: 50px;
 }
 
-/* ปรับแต่งข้อความ Welcome */
 .brand-title {
     color: #1D3E6E;
     font-size: 36px;
@@ -697,22 +688,17 @@ tr {
     text-align: center;
 }
 
-/* ปรับแต่งการ์ด Login ให้เหมือนภาพ */
 .login-card {
     position: relative;
     border: none;
     border-radius: 10px;
-    /* มุมมนน้อยกว่าเดิมนิดหน่อย */
     background: #FFFFFF;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    /* เงาฟุ้งๆ */
     padding: 40px 30px;
     max-width: 400px !important;
-    /* บีบให้เล็กลงตามภาพ */
     overflow: hidden;
 }
 
-/* แถบเขียวด้านบนการ์ด */
 .login-card::before {
     content: '';
     position: absolute;
@@ -721,10 +707,8 @@ tr {
     width: 100%;
     height: 5px;
     background: #10B981;
-    /* สีเขียว */
 }
 
-/* ลิงก์ Forgot Password */
 .forgot-pass-link {
     text-align: right;
     margin-bottom: 10px;
@@ -737,10 +721,8 @@ tr {
     font-weight: 600;
 }
 
-/* ปุ่ม Login */
 .login-btn {
     background: #10B981;
-    /* สีเขียวล้วน ไม่เอา Gradient */
     border-radius: 6px;
     box-shadow: none;
 }
@@ -754,7 +736,7 @@ tr {
     12. RESPONSIVE DESIGN (NEW SECTION)
    ========================================= */
 
-/* [NEW] Tablet / iPad (768px and up) */
+/* Tablet / iPad (768px and up) */
 @media (min-width: 768px) {
     .app-container {
         max-width: 720px;
@@ -777,11 +759,12 @@ tr {
     }
 }
 
+/* PC (1024px and up) */
 @media (min-width: 1024px) {
     .login-layout {
-        flex-direction: row; /* เรียงแนวนอน ซ้าย-ขวา */
+        flex-direction: row;
         justify-content: center;
-        gap: 233px; /* ระยะห่างระหว่าง Text กับ Card */
+        gap: 233px;
     }
 
     .login-intro {
@@ -791,7 +774,7 @@ tr {
 
     .brand-title {
         text-align: left;
-        font-size: 64px; /* ขยายตัวหนังสือใหญ่ */
+        font-size: 64px;
     }
 
     .brand-subtitle {
@@ -801,7 +784,7 @@ tr {
 
     .login-card {
         width: 100%;
-        margin: 0; /* ลบ margin เดิม */
+        margin: 0;
     }
 
     .app-container {
