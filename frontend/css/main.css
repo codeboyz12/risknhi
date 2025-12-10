@@ -194,6 +194,11 @@ header {
     animation: fadeIn 1s ease-out;
 }
 
+.register-form.login-card {
+    /* ขยายความกว้างเฉพาะหน้า Register ให้กว้างกว่า Login นิดนึงเพราะช่องเยอะ */
+    max-width: 450px !important;
+}
+
 .form-group {
     position: relative;
     width: 100%;
@@ -776,7 +781,7 @@ tr {
     .login-layout {
         flex-direction: row; /* เรียงแนวนอน ซ้าย-ขวา */
         justify-content: center;
-        gap: 100px; /* ระยะห่างระหว่าง Text กับ Card */
+        gap: 233px; /* ระยะห่างระหว่าง Text กับ Card */
     }
 
     .login-intro {
