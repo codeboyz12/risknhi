@@ -25,3 +25,12 @@ exports.getAllPatient = async (req, res) => {
     const row = await patientModel.selectAll();
     res.json(row);
 }
+
+exports.dashboard = async (req, res) => {
+    const row = await patientModel.dashboard();
+
+    res.json({
+        success: true,
+        data: row
+    });
+}

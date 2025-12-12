@@ -32,3 +32,28 @@ exports.selectAll = () => {
         );
     });
 }
+
+exports.dashboard = () => {
+    return new Promise((resolve, reject) => {
+        const sql = `
+            SELECT 
+                p.buildingID,
+                b.building_name,
+                COUNT(*) AS total
+            FROM patient p
+            JOIN building b ON p.buildingID = b.buildingID
+            GROUP BY p.buildingID
+            ORDER BY p.buildingID;
+        `;
+
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                console.log(`[patientModel] ${err}`);
+                reject(err);
+            } else {
+                console.log(`[patientModel] Dashboard grouped by building name`);
+                resolve(rows);
+            }
+        });
+    });
+}

@@ -10,6 +10,7 @@ const routes = express.Router();
 routes.get('/getAuth', authController.getAllAuth);
 routes.get('/getBuild', buildingController.getAllBuild);
 routes.get('/getPatient', patientController.getAllPatient);
+routes.get('/getDashboard', patientController.dashboard);
 
 routes.post('/register', authController.register);
 routes.post('/getAuthByUser', authController.getAuthByUsername);
