@@ -33,3 +33,26 @@ exports.selectAll = () => {
         );
     });
 }
+
+exports.checkRecentSick = (userID) => {
+    return new Promise((resolve, reject) => {
+        const sql = `
+            SELECT buildingID AS at, stillsick AS isSick
+            FROM patient
+            WHERE userID = ?
+              AND stillsick = TRUE
+              AND time >= DATETIME('now', '-24 hours')
+            ORDER BY time DESC
+            LIMIT 1
+        `;
+
+        db.get(sql, [userID], (err, row) => {
+            if (err) {
+                console.log(`[patientModel] ${err}`);
+                reject(err);
+            } else {
+                resolve(row); // รีเทิร์นเป็น boolean
+            }
+        });
+    });
+};

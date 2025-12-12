@@ -1,4 +1,4 @@
-async function loadDashboard() {
+const loadDashboard = async () => {
     const tbody = document.querySelector('.table-body');
 
     // ล้างข้อมูลเก่า
@@ -39,12 +39,29 @@ async function loadDashboard() {
 
 
 // ระดับความเสี่ยง (แก้ได้ตามใจคุณ)
-function getRiskLevel(total) {
+const getRiskLevel = total => {
     if (total >= 15) return { text: "สูง", class: "text-red" };
     if (total >= 7) return { text: "ปานกลาง", class: "text-yellow" };
     return { text: "ต่ำ", class: "text-green" };
 }
 
+const initial = () => {
+    const profile = localStorage.getItem("profile");
+    if( profile === null ){
+        console.log("Not login yet");
+        return;
+    } else {
+        const data = JSON.parse(profile);
+        console.log(data);
+    }
+}
+
 
 // เรียกทำงานตอนหน้าโหลด
+window.addEventListener('DOMContentLoaded', initial);
 window.addEventListener('DOMContentLoaded', loadDashboard);
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("imSick").addEventListener("click", () => {
+        window.location.href = '/sickreccord';
+    })
+});

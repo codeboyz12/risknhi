@@ -2,6 +2,7 @@ const express = require('express');
 const authController = require('../controllers/authController');
 const buildingController = require('../controllers/buildingController');
 const patientController = require('../controllers/patientController');
+const userController = require('../controllers/userController');
 const {
     requireLogin
 } = require('../middleware/authMiddleware');
@@ -18,5 +19,6 @@ routes.post('/login', authController.login);
 routes.post('/logout', authController.logout);
 routes.post('/addBuilding', buildingController.addBuilding);
 routes.post('/addPatient', patientController.addPatient);
+routes.post('/isUserSick', userController.isUserSick);
 
 module.exports = routes;

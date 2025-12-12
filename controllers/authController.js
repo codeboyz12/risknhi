@@ -57,6 +57,7 @@ exports.login = async (req, res) => {
         console.log(sessions);
         res.cookie("sessionId", sessionId, { httpOnly: true }).json({
             success: true,
+            userId: row.userID,
             sessionId
         });
     } else {
