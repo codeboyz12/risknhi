@@ -50,7 +50,7 @@ const initial = async () => {
     if( profile === null ){
         console.log("Not login yet");
         await showStatusPopup(false);
-        return;
+        await showUserStatus(false);
     } else {
         const profileJson = JSON.parse(profile);
         console.log(profileJson);
@@ -68,6 +68,17 @@ const initial = async () => {
         } else {
             console.log('Error fetch /api/isUserSick')
         }
+    }
+}
+
+const showUserStatus = async (userLogin) => {
+    const statusBlock = document.getElementById("status-card");
+    if(userLogin) {
+        console.log(userLogin);
+        return;
+    } else {
+        statusBlock.style.display = "none";
+        return;
     }
 }
 

@@ -100,7 +100,8 @@ const logout = async () => {
 
     if (response.success) {
         // redirect ไป login
-        window.location.href = '/login';
+        localStorage.clear();
+        window.location.href = '/';
     } else {
         alert(response.message);
     }
