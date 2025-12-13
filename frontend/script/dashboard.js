@@ -45,14 +45,59 @@ const getRiskLevel = total => {
     return { text: "ต่ำ", class: "text-green" };
 }
 
-const initial = () => {
+const initial = async () => {
     const profile = localStorage.getItem("profile");
     if( profile === null ){
         console.log("Not login yet");
+        await showStatusPopup(false);
         return;
     } else {
-        const data = JSON.parse(profile);
-        console.log(data);
+        const profileJson = JSON.parse(profile);
+        console.log(profileJson);
+        const {success, stillsick, data} = await fetch('/api/isUserSick', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "userID": profileJson.userID
+            })
+        }).then(r => r.json());
+        if(success){
+            showStatusPopup(stillsick);
+            console.log(stillsick);
+            console.log(data);
+        } else {
+            console.log('Error fetch /api/isUserSick')
+        }
+    }
+}
+
+const showStatusPopup = async (userIsSick) => {
+    const modal = document.getElementById('sickStatusPopup');
+    if(userIsSick) {
+        modal.style.display = "blcok";
+        return;
+    } else {
+        modal.style.display = "none";
+        return;
+    }
+}
+
+const userGetWell = async () => {
+    const session = localStorage.getItem("sessionId");
+    console.log(session);
+    const response = await fetch('/api/userGetWell', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            session: session
+        })
+    }).then( r => r.json());
+    if(response.success){
+        console.log("User status update");
+        await showStatusPopup(false);
     }
 }
 
@@ -63,5 +108,12 @@ window.addEventListener('DOMContentLoaded', loadDashboard);
 window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("imSick").addEventListener("click", () => {
         window.location.href = '/sickreccord';
+    });
+    document.getElementById("getWellBtn").addEventListener("click", async () => {
+        await userGetWell();
+        window.location.href = '/';
+    })
+    document.querySelector(".modal-close").addEventListener("click", async () => {
+        await showStatusPopup(false);
     })
 });

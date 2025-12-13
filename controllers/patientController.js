@@ -34,3 +34,17 @@ exports.dashboard = async (req, res) => {
         data: row
     });
 }
+
+exports.userGetWell = async (req, res) => {
+    const {session} = req.body;
+    console.log(session)
+    console.log(sessions[session])
+    const userID = sessions[session].userId;
+    const response = await patientModel.updateStillSickFalseByUser(userID);
+
+    if(response.success){
+        res.json({
+            success: true
+        })
+    }
+}

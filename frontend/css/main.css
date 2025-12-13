@@ -519,7 +519,7 @@ tr {
     10. MODAL POPUP
     ========================================= */
 .modal-overlay {
-    display: none;
+    /* display: none; */
     position: fixed;
     top: 0;
     left: 0;
@@ -561,6 +561,26 @@ tr {
     margin-bottom: 25px;
     font-weight: bold;
 }
+
+.modal-content {
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    color: #555;
+}
+
+.modal-close:hover {
+    color: #000;
+}
+
 
 .status-btn-group {
     display: flex;

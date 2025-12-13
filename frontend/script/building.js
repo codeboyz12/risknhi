@@ -79,6 +79,12 @@ async function addPatientRecord() {
         }).then(r => r.json());
 
         if (response.success) {
+            const profile = localStorage.getItem("profile");
+            const profileJson = JSON.parse(profile);
+            console.log(profileJson);
+            profileJson.at = buildingID;
+            console.log(profileJson);
+            localStorage.setItem("profile", JSON.stringify(profileJson));
             alert("บันทึกข้อมูลสำเร็จ!");
             window.location.href = '/';
         } else {

@@ -20,5 +20,6 @@ routes.post('/logout', authController.logout);
 routes.post('/addBuilding', buildingController.addBuilding);
 routes.post('/addPatient', patientController.addPatient);
 routes.post('/isUserSick', userController.isUserSick);
+routes.post('/userGetWell', patientController.userGetWell);
 
 module.exports = routes;
