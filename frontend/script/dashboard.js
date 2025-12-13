@@ -52,6 +52,7 @@ const initial = async () => {
         await showStatusPopup(false);
         await showUserStatus(false);
     } else {
+        await showUserStatus(true);
         const profileJson = JSON.parse(profile);
         console.log(profileJson);
         const {success, stillsick, data} = await fetch('/api/isUserSick', {
@@ -63,8 +64,6 @@ const initial = async () => {
         }).then(r => r.json());
         if(success){
             showStatusPopup(stillsick);
-            console.log(stillsick);
-            console.log(data);
         } else {
             console.log('Error fetch /api/isUserSick')
         }
@@ -73,11 +72,22 @@ const initial = async () => {
 
 const showUserStatus = async (userLogin) => {
     const statusBlock = document.getElementById("status-card");
+    const userStatus = document.getElementById("userStatus");
+    const atBuilding = document.getElementById("atBuilding");
+    const riskLevel = document.getElementById("riskLevel");
+
+    const profile = localStorage.getItem("profile");
+    const profileJson = JSON.parse(profile);
+
     if(userLogin) {
         console.log(userLogin);
+        userStatus.innerHTML = profileJson.stillsick ? "ป่วย" : "ปกติ";
+        atBuilding.innerHTML = profileJson.at;
+        riskLevel.innerHTML = "Please login";
         return;
     } else {
         statusBlock.style.display = "none";
+        console.log("Eieieie");
         return;
     }
 }
