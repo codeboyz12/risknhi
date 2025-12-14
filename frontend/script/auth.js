@@ -69,6 +69,12 @@ const login = async () => {
         } else {
             console.log(response.sessionId);
             localStorage.setItem("sessionId", response.sessionId);
+            const profile = {
+                userID: response.userId,
+                at: null,
+                isSick: false
+            }
+            localStorage.setItem("profile", JSON.stringify(profile));
             window.location.href = "/";
         }
     }
@@ -94,7 +100,8 @@ const logout = async () => {
 
     if (response.success) {
         // redirect ไป login
-        window.location.href = '/login';
+        localStorage.clear();
+        window.location.href = '/';
     } else {
         alert(response.message);
     }
