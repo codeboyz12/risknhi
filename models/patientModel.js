@@ -44,7 +44,7 @@ exports.dashboard = () => {
             JOIN building b ON p.buildingID = b.buildingID
             WHERE p.stillsick = TRUE
             GROUP BY p.buildingID
-            ORDER BY p.buildingID;
+            ORDER BY total DESC;
         `;
 
         db.all(sql, [], (err, rows) => {
@@ -109,3 +109,20 @@ exports.updateLocationByUser = (userID, buildingID, floor_number) => {
         });
     });
 };
+
+exports.deleteByUserID = (userID) => {
+    return new Promise((resolve, reject) => {
+        db.run('DELETE FROM patient WHERE userID = ?', 
+            [userID],
+            function (err) {
+                if (err) {
+                    console.log(`[patientModel] ${err}`);
+                    reject(err);
+                } else {
+                    console.log(`[patientModel] Deleted patient records for userID: ${userID}`);
+                    resolve(this.changes);
+                }
+            }
+        );
+    });
+}
