@@ -110,10 +110,26 @@ header {
     margin-bottom: 20px;
 }
 
+.spacer {
+    flex-grow: 1;
+}
+
 .top-nav {
     display: flex;
     justify-content: flex-end;
+    margin-left: 10px;
     margin-bottom: 10px;
+}
+
+.account-icon {
+    margin: 0px 20px;
+}
+.top-nav a.account-icon {
+    order: 1;
+}
+
+.top-nav a.logout-icon {
+    order: 2;
 }
 
 .nav-header {
@@ -240,46 +256,77 @@ header {
     color: var(--text-muted);
 }
 
+/* จัด Layout กล่องหุ้ม Input ให้มีระยะห่าง (Gap) อัตโนมัติ */
 .input-wrapper {
     position: relative;
     width: 100%;
     max-width: 320px;
+    display: flex;           /* ใช้ Flexbox */
+    flex-direction: column;  /* เรียงแนวตั้ง */
+    gap: 20px;               /* กำหนดช่องไฟระหว่าง Input ที่นี่ (แก้ได้ตามใจชอบ) */
 }
 
+/* ปรับแต่งตัว Dropdown */
 .custom-select {
     width: 100%;
-    padding: 15px 20px;
-    appearance: none;
+    padding: 16px 20px;      /* เพิ่มความสูงนิดหน่อยให้ดูโปร่ง */
+    appearance: none;        /* ซ่อนลูกศรเดิมของ Browser */
     -webkit-appearance: none;
     background-color: #FFFFFF;
-    border: 1px solid #D1D5DB;
-    border-radius: 15px;
+    border: 1px solid #E5E7EB; /* เส้นขอบสีเทาอ่อน */
+    border-radius: 16px;     /* มุมโค้งมนขึ้น */
     box-shadow: var(--shadow-sm);
     color: var(--text-dark);
     font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
     outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Effect ตอนเอาเมาส์ไปโดน หรือกดเลือก */
+.custom-select:hover {
+    border-color: #10B981;   /* สีเขียว Brand */
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
 }
 
 .custom-select:focus {
     border-color: #10B981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
 }
 
+/* ปรับแต่งลูกศร (Arrow) ให้สวยงาม */
 .select-arrow {
     position: absolute;
-    right: 20px;
-    pointer-events: none;
+    right: 20px;             /* ระยะห่างจากขวา */
+    pointer-events: none;    /* ให้คลิกทะลุไปโดน Select ได้ */
+    color: #9CA3AF;          /* สีเทาจางๆ ดูแพง */
+    font-size: 12px;         /* ขนาดลูกศร */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* ทำให้ลูกศรขยับและเปลี่ยนสีเมื่อเอาเมาส์ไปโดนกล่อง */
+.input-wrapper:hover .select-arrow {
     color: #10B981;
-    font-size: 12px;
+}
+
+/* =========================================
+   POSITIONING CALCULATIONS (จัดตำแหน่งลูกศร)
+   เนื่องจาก HTML วาง div ต่อกัน เราต้องคำนวณ top ให้แม่นยำ
+   ========================================= */
+
+/* ลูกศรตัวแรก (Building) */
+/* อยู่กึ่งกลางของ Input แรก (สูงประมาณ 58px -> กึ่งกลางคือ 29px) */
+#buildingSelect + .select-arrow {
+    top: 29px;
+    transform: translateY(-50%); /* ดึงกลับขึ้นมา 50% ให้กลางเป๊ะ */
+}
+
+/* ลูกศรตัวที่สอง (Floor) */
+/* คำนวณจาก: ความสูง Input แรก (58px) + Gap (20px) + กึ่งกลาง Input สอง (29px) = 107px */
+#floorSelect + .select-arrow {
+    top: 107px; 
     transform: translateY(-50%);
-}
-
-.buildingSelect+.select-arrow {
-    top: 26px;
-}
-
-.floorSelect+.select-arrow {
-    top: 88px;
 }
 
 /* =========================================
@@ -491,6 +538,33 @@ tr {
     background: var(--imfine-gradient);
 }
 
+.main-btn.danger-btn {
+    display: flex;
+    align-self: center;
+    width: 140px;
+}
+
+#deleteAccountBtn {
+    display: inline-block;
+    margin-top: 15px; 
+    padding: 0;
+    color: #DC2626;
+    background: transparent;
+    border: 0;
+    font-size: 16px; 
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-decoration: underline;
+    box-shadow: none;
+}
+
+#deleteAccountBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: none;
+
+}
 /* =========================================
    NEW DASHBOARD STATUS CARD DESIGN
    ========================================= */
@@ -813,34 +887,56 @@ tr {
     margin-bottom: 10px;
 }
 
+/* =========================================
+   FIX MODAL INPUTS STYLE
+   ========================================= */
+
+/* 1. จัด Layout ช่องไฟภายใน Modal */
 .popup-input-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px; /* ระยะห่างระหว่าง Input เท่ากับหน้าหลัก */
+    width: 100%;
+    padding-top: 10px;
 }
 
+/* 2. ปรับแต่ง Input ใน Modal ให้สวยเหมือนหน้าหลัก */
 .popup-select {
-    background-color: #F9FAFB;
+    width: 100%;
+    background-color: #F9FAFB; /* สีพื้นหลังอ่อนๆ ให้ตัดกับ Modal สีขาว */
     border: 1px solid #E5E7EB;
-    border-radius: 10px;
-    box-shadow: none;
-    font-size: 14px;
-    color: var(--text-dark);
 }
 
-.floorSelect {
-    margin-top: 10px;
+.popup-select:focus {
+    background-color: #FFFFFF;
+    border-color: #10B981;
 }
 
+/* 3. จัดตำแหน่งลูกศรใน Modal (ใช้ Logic เดียวกับหน้าหลัก) */
+
+/* ลูกศรตัวแรก (Building) */
+.popup-input-wrapper .buildingSelect + .select-arrow {
+    top: 29px; /* กึ่งกลาง Input แรก */
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+/* ลูกศรตัวที่สอง (Floor) */
+/* คำนวณ: Inputแรก(58px) + Gap(20px) + กึ่งกลางInputสอง(29px) = 107px */
+.popup-input-wrapper .floorSelect + .select-arrow {
+    top: 107px; 
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+/* 4. ปรับปุ่มยืนยันให้เต็มความกว้างและสวยงาม */
 .confirm-btn {
     margin-top: 10px;
-    background: #009688;
-    width: auto;
-    align-self: flex-end;
-    padding: 10px 25px;
-    font-size: 14px;
+    width: 100%; /* เต็มความกว้าง */
+    padding: 14px 0;
+    align-self: center; /* จัดกลาง */
 }
-
 /* =========================================
    11. LOGIN PAGE SPECIFIC STYLES
    ========================================= */
