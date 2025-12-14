@@ -274,11 +274,11 @@ header {
     transform: translateY(-50%);
 }
 
-#buildingSelect+.select-arrow {
+.buildingSelect+.select-arrow {
     top: 26px;
 }
 
-#floorSelect+.select-arrow {
+.floorSelect+.select-arrow {
     top: 88px;
 }
 
@@ -689,7 +689,7 @@ tr {
     color: var(--text-dark);
 }
 
-#floorSelect {
+.floorSelect {
     margin-top: 10px;
 }
 
