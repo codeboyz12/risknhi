@@ -52,21 +52,3 @@ exports.selectByUsername = (username) => {
         )
     })
 }
-
-exports.updatePassword = (userID, password) => {
-    return new Promise((resolve, reject) => {
-        db.run(
-            'UPDATE auth SET password = ? WHERE userID = ?',
-            [password, userID],
-            function (err) {
-                if (err) {
-                    console.log(`[authModel] Update Password Error: ${err}`);
-                    reject(err);
-                } else {
-                    console.log(`[authModel] Password updated for userID ${userID}`);
-                    resolve(true);
-                }
-            }
-        );
-    });
-}

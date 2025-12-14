@@ -763,6 +763,17 @@ tr {
     font-weight: 600;
 }
 
+.login-btn {
+    background: #10B981;
+    border-radius: 6px;
+    box-shadow: none;
+}
+
+.login-btn:hover {
+    background: #059669;
+    box-shadow: none;
+}
+
 /* =========================================
     12. RESPONSIVE DESIGN (NEW SECTION)
    ========================================= */

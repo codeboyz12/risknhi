@@ -34,37 +34,6 @@ exports.selectAll = () => {
     });
 }
 
-exports.selectById = (userID) => {
-    return new Promise((resolve, reject) => {
-        db.get('SELECT * FROM users WHERE userID = ?', [userID], (err, row) => {
-            if (err) {
-                console.log(`[userModel] ${err}`);
-                reject(err);
-            } else {
-                resolve(row);
-            }
-        });
-    });
-}
-
-exports.updateName = (userID, firstname, lastname) => {
-    return new Promise((resolve, reject) => {
-        db.run(
-            'UPDATE users SET firstname = ?, lastname = ? WHERE userID = ?',
-            [firstname, lastname, userID],
-            function (err) {
-                if (err) {
-                    console.log(`[userModel] Update error: ${err}`);
-                    reject(err);
-                } else {
-                    console.log(`[userModel] User ${userID} updated.`);
-                    resolve(true);
-                }
-            }
-        );
-    });
-}
-
 exports.checkRecentSick = (userID) => {
     return new Promise((resolve, reject) => {
         // แก้ไข SQL: JOIN ตาราง patient กับ building เพื่อเอาชื่อตึก
