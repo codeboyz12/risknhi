@@ -18,7 +18,6 @@ app.get('/', pages.index); // Version for production
 app.get('/register', pages.register);
 app.get('/login', pages.login);
 app.get('/sickreccord', requireLogin, pages.sickreccord);
-app.get('/information', requireLogin, pages.information);
 
 app.use(express.static(path.join(__dirname, 'frontend')));
 
