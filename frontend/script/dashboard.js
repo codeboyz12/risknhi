@@ -93,20 +93,70 @@ const showUserStatus = async (userLogin) => {
     const userStatus = document.getElementById("userStatus");
     const atBuilding = document.getElementById("atBuilding");
     const riskLevel = document.getElementById("riskLevel");
+    const riskIcon = riskLevel.previousElementSibling; // เลือก icon วงกลมข้างหน้า
 
     const profile = localStorage.getItem("profile");
-    const profileJson = JSON.parse(profile);
+    const profileJson = JSON.parse(profile || "{}");
 
     if(userLogin) {
-        console.log(userLogin);
-        userStatus.innerHTML = profileJson.stillsick ? "ป่วย" : "ปกติ";
-        atBuilding.innerHTML = profileJson.at;
-        riskLevel.innerHTML = "Please login";
-        return;
+        // 1. เช็คสถานะป่วยจาก Database
+        const {success, stillsick, data} = await fetch('/api/isUserSick', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "userID": profileJson.userID
+            })
+        }).then(r => r.json());
+
+        // 2. หาสถานที่ปัจจุบัน
+        // - ถ้าป่วย: ใช้ข้อมูลจาก Database (data.at)
+        // - ถ้าไม่ป่วย: ใช้ข้อมูลล่าสุดจาก LocalStorage (profile.at)
+        let currentLocation = "ไม่ระบุ";
+        if (success && stillsick && data && data.at) {
+            console.log("Data from local");
+            currentLocation = data.at;
+        } else if (profileJson.at) {
+            console.log("Data from API");
+            currentLocation = profileJson.at;
+        }
+
+        // 3. แสดงผล Text สถานะ และ สถานที่
+        userStatus.innerHTML = (success && stillsick) ? "ป่วย" : "สบายดี";
+        atBuilding.innerHTML = currentLocation;
+
+        // 4. คำนวณ "ระดับความเสี่ยง" ของตึกที่เราอยู่ (แทนที่คำว่า Please Login)
+        if (currentLocation !== "ไม่ระบุ") {
+            try {
+                // ดึงข้อมูล Dashboard มาเทียบดูว่าตึกที่เราอยู่มีคนป่วยกี่คน
+                const dashResponse = await fetch('/api/getDashboard').then(r => r.json());
+                if (dashResponse.success) {
+                    // หาตึกที่เราอยู่
+                    const buildingData = dashResponse.data.find(b => b.building_name === currentLocation);
+                    const totalSick = buildingData ? buildingData.total : 0;
+                    
+                    // คำนวณความเสี่ยง (Reuse ฟังก์ชันที่มีอยู่แล้ว)
+                    const risk = getRiskLevel(totalSick); 
+
+                    // แสดงผล Text ความเสี่ยง
+                    riskLevel.innerHTML = risk.text;
+                    riskLevel.className = `text ${risk.class}`; // ใส่สีให้ตัวหนังสือ (เขียว/เหลือง/แดง)
+
+                    // เปลี่ยนสี Icon วงกลม (Optional: ถ้า CSS รองรับ)
+                    riskIcon.style.color = (risk.text === "สูง") ? "#D32F2F" : 
+                                           (risk.text === "ปานกลาง") ? "#FFC107" : "#388E3C";
+                }
+            } catch (err) {
+                console.error("Error fetching risk level:", err);
+                riskLevel.innerHTML = "-";
+            }
+        } else {
+            riskLevel.innerHTML = "-";
+            riskIcon.style.color = "#ccc";
+        }
+
     } else {
+        // กรณีไม่ได้ Login
         statusBlock.style.display = "none";
-        console.log("Eieieiei");
-        return;
     }
 }
 
@@ -162,6 +212,172 @@ const userGetWell = async () => {
     }
 };
 
+// 1. ฟังก์ชันสำหรับดึงข้อมูลตึก (ใช้ Logic เดียวกับ building.js แต่ปรับ URL เป็น Relative Path)
+const fetchBuildingData = async () => {
+    try {
+        // ใช้ Relative Path เพื่อความยืดหยุ่น
+        const response = await fetch('/api/getBuild');
+        const json = await response.json();
+        return json.success ? json.data : [];
+    } catch (error) {
+        console.error("Error fetching buildings:", error);
+        return [];
+    }
+}
+
+// 2. ฟังก์ชันสำหรับกำหนดค่า Dropdown ให้กับ Modal ที่ระบุ
+const setupModalDropdowns = async (modalId) => {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    // เลือก Dropdown ภายใน Modal นั้นๆ โดยใช้ class
+    const buildingSelect = modal.querySelector('.buildingSelect');
+    const floorSelect = modal.querySelector('.floorSelect');
+
+    if (!buildingSelect || !floorSelect) return;
+
+    // ดึงข้อมูลตึก
+    const buildings = await fetchBuildingData();
+
+    // เคลียร์และเพิ่มตัวเลือกตึก
+    buildingSelect.innerHTML = '<option value="" disabled selected>เลือกสถานที่</option>';
+    buildings.forEach(b => {
+        let option = document.createElement("option");
+        option.value = b.buildingID;
+        option.textContent = b.building_name;
+        buildingSelect.appendChild(option);
+    });
+
+    // เพิ่ม Event Listener เมื่อเลือกตึก ให้คำนวณชั้น
+    buildingSelect.addEventListener("change", () => {
+        const selectedID = parseInt(buildingSelect.value);
+        const building = buildings.find(b => b.buildingID === selectedID);
+
+        // เคลียร์ชั้นเก่า
+        floorSelect.innerHTML = '<option value="" disabled selected>เลือกชั้น</option>';
+
+        // เพิ่มชั้นตามจำนวนจริงของตึกนั้น
+        if (building) {
+            for (let i = 1; i <= building.total_floor; i++) {
+                let option = document.createElement("option");
+                option.value = i;
+                option.textContent = `ชั้น ${i}`;
+                floorSelect.appendChild(option);
+            }
+        }
+    });
+}
+
+// --------------------------------------------------------
+// 1. ฟังก์ชันสำหรับ #sickStatusPopup (ยิง API อัปเดตตึก)
+// --------------------------------------------------------
+const setupApiLocationConfirm = (modalId) => {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    const confirmBtn = modal.querySelector('.confirm-btn');
+    const buildingSelect = modal.querySelector('.buildingSelect');
+    const floorSelect = modal.querySelector('.floorSelect');
+
+    if (!confirmBtn) return;
+
+    // ล้าง Event Listener เก่า
+    const newConfirmBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+    newConfirmBtn.addEventListener('click', async () => {
+        const buildingID = buildingSelect.value;
+        const floorNumber = floorSelect.value;
+        const session = localStorage.getItem("sessionId");
+
+        if (!buildingID || !floorNumber) {
+            alert("กรุณาเลือกตึกและชั้นให้ครบถ้วน");
+            return;
+        }
+
+        try {
+            // ยิง API เพื่อแจ้ง Server ว่าผู้ป่วยย้ายตึกแล้ว
+            const response = await fetch('/api/updatePatientLocation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    session: session,
+                    buildingID: Number(buildingID),
+                    floor_number: Number(floorNumber)
+                })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                // อัปเดต LocalStorage
+                const profile = JSON.parse(localStorage.getItem("profile") || "{}");
+                const selectedBuildingName = buildingSelect.options[buildingSelect.selectedIndex].text;
+                
+                profile.at = selectedBuildingName;
+                profile.stillsick = true; 
+                localStorage.setItem("profile", JSON.stringify(profile));
+
+                alert("อัปเดตข้อมูลกับ Server เรียบร้อยแล้ว!");
+                modal.style.display = "none";
+                await showUserStatus(true);
+                await loadDashboard(); 
+
+            } else {
+                alert("เกิดข้อผิดพลาด: " + (result.message || "ไม่สามารถบันทึกข้อมูลได้"));
+            }
+        } catch (error) {
+            console.error("Error updating patient location:", error);
+            alert("เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
+        }
+    });
+}
+
+// --------------------------------------------------------
+// 2. ฟังก์ชันสำหรับ #StatusPopup (บันทึก LocalStorage อย่างเดียว)
+// --------------------------------------------------------
+const setupLocalLocationConfirm = (modalId) => {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    const confirmBtn = modal.querySelector('.confirm-btn');
+    const buildingSelect = modal.querySelector('.buildingSelect');
+    
+    // สำหรับ StatusPopup อาจจะไม่บังคับชั้นก็ได้ แต่ถ้ามี dropdown ก็รับค่าไว้
+    // const floorSelect = modal.querySelector('.floorSelect'); 
+
+    if (!confirmBtn) return;
+
+    // ล้าง Event Listener เก่า
+    const newConfirmBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+    newConfirmBtn.addEventListener('click', async () => {
+        const buildingID = buildingSelect.value;
+
+        if (!buildingID) {
+            alert("กรุณาเลือกสถานที่");
+            return;
+        }
+
+        // --- ทำงานแค่ LocalStorage ---
+        const profile = JSON.parse(localStorage.getItem("profile") || "{}");
+        const selectedBuildingName = buildingSelect.options[buildingSelect.selectedIndex].text;
+
+        profile.at = selectedBuildingName;
+        // ไม่ต้องแก้ค่า stillsick เพราะแค่ระบุตำแหน่งเฉยๆ
+        console.log(profile);
+        
+        localStorage.setItem("profile", JSON.stringify(profile));
+        // ---------------------------
+
+        alert("บันทึกตำแหน่งลงในเครื่องแล้ว");
+        modal.style.display = "none";
+
+        // รีเฟรชหน้าจอ UI
+        await showUserStatus(true);
+    });
+}
+
 // เรียกทำงานตอนหน้าโหลด
 window.addEventListener('DOMContentLoaded', initial);
 window.addEventListener('DOMContentLoaded', loadDashboard);
@@ -171,9 +387,23 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById("imFine").addEventListener("click", async () => {
         await userGetWell();
+        document.getElementById("imFine").style.display = "none";
         window.location.href = '/';
-    })
-    document.querySelector(".modal-close").addEventListener("click", async () => {
+    });
+    document.getElementById("sickStatusPopupClose").addEventListener("click", async () => {
         await showStatusPopup(false);
-    })
+    });
+     document.getElementById("StatusPopupClose").addEventListener("click", async () => {
+        await showLocationPopup(false);
+    });
+    if (typeof setupModalDropdowns === 'function') {
+        setupModalDropdowns('sickStatusPopup');
+        setupModalDropdowns('StatusPopup');
+    }
+
+    // 1. #sickStatusPopup -> ใช้แบบยิง API (คนป่วยย้ายที่)
+    setupApiLocationConfirm('sickStatusPopup');
+
+    // 2. #StatusPopup -> ใช้แบบ LocalStorage (คนทั่วไประบุตำแหน่ง)
+    setupLocalLocationConfirm('StatusPopup');
 });
