@@ -83,3 +83,29 @@ exports.updateStillSickFalseByUser = (userID) => {
     });
 };
 
+exports.updateLocationByUser = (userID, buildingID, floor_number) => {
+    return new Promise((resolve, reject) => {
+        // อัปเดตตึกและชั้น สำหรับ record ล่าสุดที่ยังป่วยอยู่
+        const sql = `
+            UPDATE patient
+            SET buildingID = ?, 
+                floor_number = ?,
+                time = CURRENT_TIMESTAMP
+            WHERE userID = ? 
+              AND stillsick = TRUE
+        `;
+
+        db.run(sql, [buildingID, floor_number, userID], function (err) {
+            if (err) {
+                console.log(`[patientModel] Update location error: ${err}`);
+                reject(err);
+            } else {
+                console.log(`[patientModel] Updated location for userID=${userID}`);
+                resolve({
+                    success: true,
+                    affectedRows: this.changes
+                });
+            }
+        });
+    });
+};

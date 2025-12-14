@@ -52,10 +52,13 @@ const loadBuildingsToSelect = async () => {
 loadBuildingsToSelect();
 
 async function addPatientRecord() {
-    const buildingID = document.getElementById("buildingSelect").value;
-    const floorNumber = document.getElementById("floorSelect").value;
+    // 1. อ้างอิงตัว Element ของ Select ก่อน เพื่อจะดึงทั้ง value และ text
+    const buildingSelect = document.getElementById("buildingSelect");
+    const floorSelect = document.getElementById("floorSelect");
+    
+    const buildingID = buildingSelect.value;
+    const floorNumber = floorSelect.value;
     const session = localStorage.getItem("sessionId");
-    console.log(session);
 
     if (!buildingID || !floorNumber) {
         alert("กรุณาเลือกตึกและชั้นให้ครบก่อน!");
@@ -81,9 +84,16 @@ async function addPatientRecord() {
         if (response.success) {
             const profile = localStorage.getItem("profile");
             const profileJson = JSON.parse(profile);
-            console.log(profileJson);
-            profileJson.at = buildingID;
-            console.log(profileJson);
+            
+            // --- จุดที่แก้ไข ---
+            // ดึงชื่อตึกจาก text ของ option ที่ถูกเลือก
+            const selectedBuildingName = buildingSelect.options[buildingSelect.selectedIndex].text;
+            
+            // บันทึกชื่อตึก (เช่น "อาคารเรียนรวม 1") แทน ID
+            profileJson.at = selectedBuildingName; 
+            profileJson.stillsick = true; // อัปเดตสถานะด้วยว่าป่วยอยู่
+            // ------------------
+
             localStorage.setItem("profile", JSON.stringify(profileJson));
             alert("บันทึกข้อมูลสำเร็จ!");
             window.location.href = '/';
@@ -95,7 +105,6 @@ async function addPatientRecord() {
         alert("เกิดข้อผิดพลาดในการเชื่อมต่อ API");
     }
 }
-
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("sickRecordBtn")
             .addEventListener("click", addPatientRecord);

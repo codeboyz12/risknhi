@@ -36,22 +36,26 @@ exports.selectAll = () => {
 
 exports.checkRecentSick = (userID) => {
     return new Promise((resolve, reject) => {
+        // แก้ไข SQL: JOIN ตาราง patient กับ building เพื่อเอาชื่อตึก
         const sql = `
-            SELECT buildingID AS at, stillsick AS isSick
-            FROM patient
-            WHERE userID = ?
-              AND stillsick = TRUE
-              AND time >= DATETIME('now', '-24 hours')
-            ORDER BY time DESC
+            SELECT 
+                b.building_name AS at, 
+                p.stillsick AS isSick
+            FROM patient p
+            JOIN building b ON p.buildingID = b.buildingID
+            WHERE p.userID = ?
+              AND p.stillsick = 1
+              AND p.time >= DATETIME('now', '-24 hours')
+            ORDER BY p.time DESC
             LIMIT 1
         `;
 
         db.get(sql, [userID], (err, row) => {
             if (err) {
-                console.log(`[patientModel] ${err}`);
+                console.log(`[userModel] ${err}`); // แก้ log ให้ตรงกับไฟล์
                 reject(err);
             } else {
-                resolve(row); // รีเทิร์นเป็น boolean
+                resolve(row); 
             }
         });
     });
