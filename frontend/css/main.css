@@ -492,6 +492,145 @@ tr {
 }
 
 /* =========================================
+   NEW DASHBOARD STATUS CARD DESIGN
+   ========================================= */
+
+.status-card {
+    display: flex; /* ใช้ Flexbox แทน Grid เพื่อการจัดเรียงที่ยืดหยุ่น */
+    flex-direction: column; /* Mobile-first: เรียงลงมา */
+    gap: 20px;
+    padding: 30px;
+    align-items: flex-start; /* เริ่มต้นชิดซ้าย */
+    background: #ffffff;
+    border-radius: 20px; /* เพิ่มความมน */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* เงานุ่มขึ้น */
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+/* Wrapper ของแต่ละก้อนข้อมูล */
+.status-item-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* กล่อง Icon ตกแต่ง */
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+/* สีพื้นหลัง Icon แยกตามประเภท */
+.location-bg { background: #E0F2FE; color: #0284C7; } /* ฟ้า */
+.health-bg   { background: #FCE7F3; color: #DB2777; } /* ชมพู */
+.risk-bg     { background: #FEF3C7; color: #D97706; } /* เหลือง/ส้ม */
+
+/* ส่วนข้อความ */
+.info-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-content .label {
+    font-size: 12px;
+    color: #9CA3AF;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.info-content .value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1F2937;
+}
+
+/* Badge สำหรับ Risk Level ให้ดูโดดเด่น */
+.value.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    /* ตัวอย่าง Default (จะถูก override ด้วย class text-red/green จาก JS) */
+    background: #F3F4F6; 
+}
+
+/* เส้นคั่น (ซ่อนใน Mobile) */
+.divider {
+    display: none; 
+    width: 1px;
+    height: 50px;
+    background-color: #E5E7EB;
+}
+
+/* =========================================
+   RESPONSIVE (DESKTOP)
+   ========================================= */
+@media (min-width: 1024px) {
+    /* จัดการ Layout หลัก */
+    .content-area:not(.center-layout) {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 30px;
+        align-items: start;
+    }
+
+    /* --------------------------------------------------------
+       Status Card: จัดกึ่งกลางแต่ละช่อง
+       -------------------------------------------------------- */
+    .status-card {
+        grid-column: 1 / -1;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+        padding: 30px 20px; /* ลด Padding ด้านข้างลงนิดหน่อยเพื่อให้พื้นที่ตรงกลางสมดุล */
+    }
+
+    /* จัดแต่ละก้อนข้อมูล (Item) ให้เนื้อหาอยู่ตรงกลางเสมอ */
+    .status-item-wrapper {
+        flex: 1;              /* กินพื้นที่ 1 ส่วนเท่าๆ กัน */
+        display: flex;
+        align-items: center;
+        justify-content: center; /* <--- จุดสำคัญ: สั่งให้ Icon+Text อยู่กลางช่องตัวเอง */
+        gap: 15px;
+    }
+
+    /* ลบพวก nth-child ที่เคยสั่งชิดซ้าย/ขวาออกให้หมด เพื่อให้ทุกอันอยู่ตรงกลางเหมือนกัน */
+    
+    /* เส้นคั่นแนวตั้ง */
+    .divider {
+        display: block !important;
+        width: 1px;
+        height: 50px;
+        background-color: #E5E7EB;
+        margin: 0 10px; /* ลดระยะ margin ลงเล็กน้อย */
+        flex-shrink: 0; /* ห้ามเส้นหด */
+    }
+
+    /* --------------------------------------------------------
+       ส่วนอื่นๆ คงเดิม
+       -------------------------------------------------------- */
+    .content-area:not(.center-layout) .nearby-card {
+        grid-column: 1 / -1;
+        margin-top: 20px;
+    }
+
+    .content-area:not(.center-layout) .sick-btn {
+        grid-column: 1 / -1;
+        width: 300px;
+        margin: 30px auto 0 auto;
+    }
+}
+/* =========================================
     9. ANIMATIONS
     ========================================= */
 @keyframes fadeIn {

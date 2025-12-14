@@ -44,7 +44,7 @@ exports.dashboard = () => {
             JOIN building b ON p.buildingID = b.buildingID
             WHERE p.stillsick = TRUE
             GROUP BY p.buildingID
-            ORDER BY total;
+            ORDER BY total DESC;
         `;
 
         db.all(sql, [], (err, rows) => {

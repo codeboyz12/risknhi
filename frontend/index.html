@@ -37,18 +37,38 @@
         <main class="content-area">
 
             <section class="card status-card" id="status-card">
-                <li class="status-item">
-                    <span class="icon pin">📍</span>
-                    <span class="text" id="atBuilding">ไม่มีข้อมูล</span>
-                </li>
-                <li class="status-item">
-                    <span class="icon pulse">💓</span>
-                    <span class="text" id="userStatus">ไม่มีข้อมูล</span>
-                </li>
-                <li class="status-item">
-                    <span class="icon dot yellow">●</span>
-                    <span class="text" id="riskLevel">ไม่มีข้อมูล</span>
-                </li>
+                <div class="status-item-wrapper">
+                    <div class="icon-box location-bg">
+                        <span class="icon">📍</span>
+                    </div>
+                    <div class="info-content">
+                        <span class="label">Current Location</span>
+                        <span class="value" id="atBuilding">กำลังโหลด...</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="status-item-wrapper">
+                    <div class="icon-box health-bg">
+                        <span class="icon">💓</span>
+                    </div>
+                    <div class="info-content">
+                        <span class="label">Health Status</span>
+                        <span class="value" id="userStatus">กำลังโหลด...</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="status-item-wrapper">
+                    <div class="icon-box risk-bg">
+                        <span class="icon">⚠️</span> </div>
+                    <div class="info-content">
+                        <span class="label">Risk Level</span>
+                        <span class="value badge" id="riskLevel">กำลังโหลด...</span>
+                    </div>
+                </div>
             </section>
 
             <section class="card nearby-card">

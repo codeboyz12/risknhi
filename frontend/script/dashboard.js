@@ -139,11 +139,16 @@ const showUserStatus = async (userLogin) => {
 
                     // แสดงผล Text ความเสี่ยง
                     riskLevel.innerHTML = risk.text;
-                    riskLevel.className = `text ${risk.class}`; // ใส่สีให้ตัวหนังสือ (เขียว/เหลือง/แดง)
-
-                    // เปลี่ยนสี Icon วงกลม (Optional: ถ้า CSS รองรับ)
-                    riskIcon.style.color = (risk.text === "สูง") ? "#D32F2F" : 
-                                           (risk.text === "ปานกลาง") ? "#FFC107" : "#388E3C";
+                    riskLevel.className = "value badge"; 
+                    if (risk.text === "สูง") {
+                        riskLevel.classList.add("bg-red-light", "text-red");
+                    }
+                    else if (risk.text === "ปานกลาง") {
+                        riskLevel.classList.add("bg-yellow-light", "text-yellow");
+                    }
+                    else {
+                        riskLevel.classList.add("bg-green-light", "text-green");
+                    }
                 }
             } catch (err) {
                 console.error("Error fetching risk level:", err);
