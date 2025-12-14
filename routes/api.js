@@ -22,5 +22,7 @@ routes.post('/addPatient', patientController.addPatient);
 routes.post('/isUserSick', userController.isUserSick);
 routes.post('/userGetWell', patientController.userGetWell);
 routes.post('/updatePatientLocation', patientController.updatePatientLocation);
+routes.post('/getProfile', userController.getProfile);
+routes.post('/updateProfile', userController.updateProfile);
 
 module.exports = routes;
