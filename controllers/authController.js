@@ -1,6 +1,7 @@
 const { json } = require('express');
 const authModel = require('../models/authModel');
 const userModel = require('../models/userModel');
+const patientModel = require('../models/patientModel');
 const crypto = require("crypto");
 const sessions = require('../variable/variable');
 
@@ -80,3 +81,39 @@ exports.logout = async (req, res) => {
 
     res.status(400).json({ success: false, message: "No active session" });
 };
+
+exports.deleteAccount = async (req, res) => {
+    try {
+        const { session } = req.body;
+        const userID = sessions[session].userId;
+        
+        if (!userID) {
+            return res.json({ success: false, message: "UserID is required" });
+        }
+
+        // 1. ลบประวัติการป่วยก่อน (Cleanup)
+        await patientModel.deleteByUserID(userID);
+
+        // 2. ลบ Account หลัก (Auth + Users)
+        const affectedRows = await authModel.delete(userID);
+
+        if (affectedRows > 0) {
+            res.json({
+                success: true,
+                message: "Account deleted successfully"
+            });
+        } else {
+            res.json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+    } catch (err) {
+        console.log(`[authController] Delete error: ${err}`);
+        res.json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+}

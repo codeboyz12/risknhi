@@ -1030,7 +1030,7 @@ tr {
     .login-layout {
         flex-direction: row;
         justify-content: center;
-        gap: 233px;
+        gap: 150px;
     }
 
     .login-intro {

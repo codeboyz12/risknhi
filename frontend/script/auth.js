@@ -93,6 +93,10 @@ const checkpassword = () => {
 }
 
 const logout = async () => {
+    const session = localStorage.getItem("sessionId");
+    if(!session) {
+        window.location.href = '/login';
+    }
     const response = await fetch('/api/logout', {
         method: 'POST',
         credentials: 'include'   // สำคัญ! ให้ cookie ถูกส่งมาด้วย

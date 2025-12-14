@@ -70,3 +70,20 @@ exports.updatePassword = (userID, password) => {
         );
     });
 }
+
+exports.delete = (userID) => {
+    return new Promise((resolve, reject) => {
+        db.run('DELETE FROM auth WHERE userID = ?',
+            [userID],
+            function (err) {
+                if (err) {
+                    console.log(`[authModel] ${err}`);
+                    reject(err);
+                } else {
+                    console.log(`[authModel] Deleted auth for userID: ${userID}`);
+                    resolve(this.changes);
+                }
+            }
+        );
+    });
+}
