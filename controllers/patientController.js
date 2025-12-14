@@ -4,9 +4,8 @@ const sessions = require('../variable/variable');
 
 exports.addPatient = async (req, res) => {
     try {
-        // const {session, buildingID, floor_number} = req.body;
-        const {userID, buildingID, floor_number} = req.body;
-        // const userID = sessions[session].userId;
+        const {session, buildingID, floor_number} = req.body;
+        const userID = sessions[session].userId;
         const patientId = await patientModel.insert(userID, buildingID, floor_number);
 
         res.json({
@@ -40,6 +39,9 @@ exports.userGetWell = async (req, res) => {
     const {session} = req.body;
     console.log(session)
     console.log(sessions[session])
+    if (!session || !sessions[session]) {
+        return res.json({ success: false, message: "Session expired" });
+    }
     const userID = sessions[session].userId;
     const response = await patientModel.updateStillSickFalseByUser(userID);
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - RISKNHI</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="script/information.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="nav-header">
+            <nav>
+                <a href="/" class="back-btn" aria-label="กลับสู่หน้าหลัก">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1F2937" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+            </nav>
+            <h2 class="page-title">แก้ไขข้อมูลส่วนตัว</h2>
+        </header>
+
+        <main class="content-area center-layout">
+            <section class="register-form" aria-labelledby="form-title">
+                <header class="logo-section">
+                    <h1 id="form-title" class="brand-name" style="font-size: 20px;">Edit Profile</h1>
+                </header>
+
+                <div class="form-group">
+                    <label for="firstname"
+                        style="font-size: 14px; color: #6B7280; margin-bottom: 5px; display: block;">Firstname</label>
+                    <input type="text" class="text-input" placeholder="Firstname" id="firstname" name="firstname"
+                        autocomplete="given-name">
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname"
+                        style="font-size: 14px; color: #6B7280; margin-bottom: 5px; display: block;">Lastname</label>
+                    <input type="text" class="text-input" placeholder="Lastname" id="lastname" name="lastname"
+                        autocomplete="family-name">
+                </div>
+
+                <hr style="width: 100%; height: 1px; background: #E5E7EB; border: none; margin: 10px 0 20px 0;">
+
+                <div class="form-group">
+                    <label for="password"
+                        style="font-size: 14px; color: #6B7280; margin-bottom: 5px; display: block;">New Password
+                        (Optional)</label>
+                    <input type="password" class="text-input" placeholder="Leave blank to keep current" id="password"
+                        name="new-password" autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmpassword"
+                        style="font-size: 14px; color: #6B7280; margin-bottom: 5px; display: block;">Confirm New
+                        Password</label>
+                    <input type="password" class="text-input" placeholder="Confirm New Password" id="confirmpassword"
+                        name="confirm-password" autocomplete="new-password">
+                </div>
+
+                <p class="incor-pass" id="incorrectAlert" role="alert">Passwords do not match</p>
+
+                <button type="button" class="main-btn login-btn" id="saveProfileBtn">Save Changes</button>
+            </section>
+
+        </main>
+    </div>
+</body>
+
+</html>

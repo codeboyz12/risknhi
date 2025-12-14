@@ -18,7 +18,7 @@ const register = async () => {
             "firstname": firstname.value,
             "lastname": lastname.value
         };
-        const response = await fetch('http://localhost:8000/api/register', {
+        const response = await fetch('/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ const register = async () => {
             body: JSON.stringify(payload)
         }).then( r => r.json() );
         if (response.success) {
-            window.location.href = "/";
+            window.location.href = "/login";
         } else {
             alert("Register fail");
         }
@@ -54,7 +54,7 @@ const login = async () => {
             "username": usernameElement.value,
             "password": passwordElement.value
         }
-        const response = await fetch('http://localhost:8000/api/login', {
+        const response = await fetch('/api/login', {
             method: 'POST', 
             credentials: "include",
             headers: {

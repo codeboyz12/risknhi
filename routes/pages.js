@@ -16,3 +16,7 @@ exports.login = (req, res) => {
 exports.sickreccord = (req, res) => {
     res.sendFile(path.join(frontendPath, 'sick_reccord.html'));
 }
+
+exports.information = (req, res) => {
+    res.sendFile(path.join(frontendPath, 'information.html'));
+}
