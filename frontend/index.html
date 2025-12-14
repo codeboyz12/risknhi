@@ -68,6 +68,7 @@
             </section>
 
             <button class="main-btn sick-btn" id="imSick">I'm sick</button>
+            <button class="main-btn sick-btn" id="imFine">I'm Fine</button>
 
         </main>
     </div>
@@ -113,5 +114,29 @@
             </fieldset>
         </div>
     </div>
+
+    <div id="StatusPopup" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    
+        <div class="modal-content">
+            <button class="modal-close" aria-label="ปิดหน้าต่าง">
+                &times;
+            </button>
+            <h3 id="popup-title" class="modal-title">สวัสดี! คุณอยู่ที่ไหน?</h3>   
+            <fieldset class="location-section">
+                <div class="popup-input-wrapper">
+                    <select id="buildingSelect" class="custom-select popup-select" aria-label="เลือกอาคาร">
+                        <option value="" disabled selected>เลือกสถานที่</option>
+                    </select>
+    
+                    <select id="floorSelect" class="custom-select popup-select" aria-label="เลือกชั้น">
+                        <option value="" disabled selected>เลือกชั้น</option>
+                    </select>
+    
+                    <button class="main-btn confirm-btn">ยืนยัน</button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
 </body>
 </html>

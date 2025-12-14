@@ -47,10 +47,14 @@ const getRiskLevel = total => {
 
 const initial = async () => {
     const profile = localStorage.getItem("profile");
+    const sickbtn = document.getElementById("imSick");
+    const finebtn = document.getElementById("imFine");
     if( profile === null ){
         console.log("Not login yet");
         await showStatusPopup(false);
         await showUserStatus(false);
+        sickbtn.style.display = "block";
+        finebtn.style.display = "none";
     } else {
         await showUserStatus(true);
         const profileJson = JSON.parse(profile);
@@ -64,6 +68,14 @@ const initial = async () => {
         }).then(r => r.json());
         if(success){
             showStatusPopup(stillsick);
+            if(stillsick) {
+                sickbtn.style.display = "none";
+                finebtn.style.display = "block";
+            } else {
+                sickbtn.style.display = "block";
+                finebtn.style.display = "none";
+            }
+
         } else {
             console.log('Error fetch /api/isUserSick')
         }
@@ -87,7 +99,7 @@ const showUserStatus = async (userLogin) => {
         return;
     } else {
         statusBlock.style.display = "none";
-        console.log("Eieieie");
+        console.log("Eieieiei");
         return;
     }
 }
@@ -95,7 +107,7 @@ const showUserStatus = async (userLogin) => {
 const showStatusPopup = async (userIsSick) => {
     const modal = document.getElementById('sickStatusPopup');
     if(userIsSick) {
-        modal.style.display = "blcok";
+        modal.style.display = "flex";
         return;
     } else {
         modal.style.display = "none";
@@ -130,7 +142,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("imSick").addEventListener("click", () => {
         window.location.href = '/sickreccord';
     });
-    document.getElementById("getWellBtn").addEventListener("click", async () => {
+    document.getElementById("imFine").addEventListener("click", async () => {
         await userGetWell();
         window.location.href = '/';
     })

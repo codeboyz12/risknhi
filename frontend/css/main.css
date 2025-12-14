@@ -5,6 +5,7 @@
     --primary-gradient: #EFF4F8;
     --brand-gradient: linear-gradient(to right, #00b09b, #96c93d);
     --btn-gradient: linear-gradient(to right, #11998e, #38ef7d);
+    --imfine-gradient: linear-gradient(to right, #1a2980, #26d0ce);
     --text-main: #1F2937;
 
     --text-dark: #374151;
@@ -475,13 +476,19 @@ tr {
     transform: translateY(0);
 }
 
-.sick-btn {
-    margin-top: auto;
-}
-
 .save-btn {
     margin-top: 20px;
     width: 200px;
+}
+
+.sick-btn {
+    display: block;
+    margin-top: auto;
+}
+
+#imFine {
+    display: block;
+    background: var(--imfine-gradient);
 }
 
 /* =========================================
@@ -518,8 +525,23 @@ tr {
 /* =========================================
     10. MODAL POPUP
     ========================================= */
+#StatusPopup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-out;
+}
+
 .modal-overlay {
-    /* display: none; */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -812,7 +834,7 @@ tr {
     }
 
     .content-area:not(.center-layout) {
-        display: grid;
+        display: block;
         grid-template-columns: 1fr 2fr;
         gap: 25px;
         align-items: start;
