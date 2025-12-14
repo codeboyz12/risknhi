@@ -1,5 +1,7 @@
 const { json } = require('express');
 const userModel = require('../models/userModel');
+const authModel = require('../models/authModel');
+const sessions = require('../variable/variable');
 
 exports.isUserSick = async (req, res) => {
     try{
