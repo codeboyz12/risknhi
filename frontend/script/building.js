@@ -51,7 +51,7 @@ const loadBuildingsToSelect = async () => {
 // เรียกใช้งาน
 loadBuildingsToSelect();
 
-async function addPatientRecord() {
+const addPatientRecord = async () => {
     // 1. อ้างอิงตัว Element ของ Select ก่อน เพื่อจะดึงทั้ง value และ text
     const buildingSelect = document.getElementById("buildingSelect");
     const floorSelect = document.getElementById("floorSelect");
@@ -95,7 +95,6 @@ async function addPatientRecord() {
             // ------------------
 
             localStorage.setItem("profile", JSON.stringify(profileJson));
-            alert("บันทึกข้อมูลสำเร็จ!");
             window.location.href = '/';
         } else {
             alert("บันทึกไม่สำเร็จ: " + (response.message || "Error"));
