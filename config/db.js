@@ -13,7 +13,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 const usersTable = `
     CREATE TABLE IF NOT EXISTS users(
-        userID INTEGER NOT NULL,
+        userID INTEGER PRIMARY KEY NOT NULL,
         firstname VARCHAR NOT NULL,
         lastname VARCHAR NOT NULL,
         FOREIGN KEY (userID) REFERENCES auth(userID) ON DELETE CASCADE
