@@ -49,10 +49,12 @@ const initial = async () => {
     const profile = localStorage.getItem("profile");
     const sickbtn = document.getElementById("imSick");
     const finebtn = document.getElementById("imFine");
+    setupPopupButtons();
     if( profile === null ){
         console.log("Not login yet");
-        await showStatusPopup(false);
-        await showUserStatus(false);
+        showStatusPopup(false);
+        showLocationPopup(false);
+        showUserStatus(false);
         sickbtn.style.display = "block";
         finebtn.style.display = "none";
     } else {
@@ -69,9 +71,13 @@ const initial = async () => {
         if(success){
             showStatusPopup(stillsick);
             if(stillsick) {
+                showStatusPopup(true);
+                showLocationPopup(false);
                 sickbtn.style.display = "none";
                 finebtn.style.display = "block";
             } else {
+                showStatusPopup(false);
+                showLocationPopup(true);
                 sickbtn.style.display = "block";
                 finebtn.style.display = "none";
             }
@@ -104,6 +110,13 @@ const showUserStatus = async (userLogin) => {
     }
 }
 
+const showLocationPopup = (show) => {
+    const modal = document.getElementById('StatusPopup');
+    if (modal) {
+        modal.style.display = show ? "flex" : "none";
+    }
+}
+
 const showStatusPopup = async (userIsSick) => {
     const modal = document.getElementById('sickStatusPopup');
     if(userIsSick) {
@@ -113,6 +126,21 @@ const showStatusPopup = async (userIsSick) => {
         modal.style.display = "none";
         return;
     }
+}
+
+const setupPopupButtons = () => {
+    const modal = document.getElementById('sickStatusPopup');
+
+    const stillSickBtn = modal.querySelector('.btn-red');
+    stillSickBtn.addEventListener('click', () => {
+        window.location.href = '/sickreccord';
+    });
+
+    const getWellBtn = modal.querySelector('.btn-green');
+    getWellBtn.addEventListener('click', async () => {
+        await userGetWell();
+        window.location.href = '/';
+    });
 }
 
 const userGetWell = async () => {
@@ -132,8 +160,7 @@ const userGetWell = async () => {
         console.log("User status update");
         await showStatusPopup(false);
     }
-}
-
+};
 
 // เรียกทำงานตอนหน้าโหลด
 window.addEventListener('DOMContentLoaded', initial);
