@@ -505,7 +505,7 @@ tr {
     display: block;
     width: 100%;
     margin-top: 10px;
-    padding: 14px 0;
+    padding: 14px 0px;
     background: var(--btn-gradient);
     border: none;
     border-radius: 12px;
@@ -546,7 +546,6 @@ tr {
 .main-btn.danger-btn {
     display: flex;
     align-self: center;
-    width: 140px;
 }
 
 #deleteAccountBtn {
@@ -991,8 +990,12 @@ tr {
     background: #10B981;
 }
 
+.forgot-pass-block {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
 .forgot-pass-link {
-    text-align: right;
     margin-bottom: 10px;
     margin-top: -20px;
 }
