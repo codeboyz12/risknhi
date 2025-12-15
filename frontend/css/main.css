@@ -161,18 +161,6 @@ header {
 }
 
 .logo-icon {
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    margin-bottom: 5px;
-    background: linear-gradient(135deg, #10B981, #059669);
-    color: white;
-    border-radius: 50%;
-    border-bottom: none;
-    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-    font-size: 30px; */
     width: 160px;
     height: 160px;
     margin-right: 5px;
@@ -392,7 +380,6 @@ header {
 }
 
 .icon {
-    width: 20px;
     text-align: center;
 }
 
@@ -608,11 +595,21 @@ tr {
 }
 
 /* สีพื้นหลัง Icon แยกตามประเภท */
-.location-bg { background: #E0F2FE; color: #0284C7; } /* ฟ้า */
-.health-bg   { background: #FCE7F3; color: #DB2777; } /* ชมพู */
-.risk-bg     { background: #FEF3C7; color: #D97706; } /* เหลือง/ส้ม */
+.location-bg {
+    background: #E0F2FE;
+    color: #0284C7; 
+}
 
-/* ส่วนข้อความ */
+.health-bg   {
+    background: #FCE7F3;
+    color: #DB2777; 
+}
+
+.risk-bg     {
+    background: #FEF3C7;
+    color: #D97706; 
+}
+
 .info-content {
     display: flex;
     flex-direction: column;
@@ -639,8 +636,6 @@ tr {
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 14px;
-    /* ตัวอย่าง Default (จะถูก override ด้วย class text-red/green จาก JS) */
-    background: #F3F4F6; 
 }
 
 /* เส้นคั่น (ซ่อนใน Mobile) */
