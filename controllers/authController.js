@@ -117,3 +117,28 @@ exports.deleteAccount = async (req, res) => {
         });
     }
 }
+
+exports.autoHealOldPatients = () => {
+    return new Promise((resolve, reject) => {
+        // SQL: อัปเดตให้ stillsick = 0 (False) 
+        // เงื่อนไข: stillsick เป็น 1 (True) และเวลา (time) น้อยกว่า "เวลาปัจจุบันลบ 24 ชม."
+        const sql = `
+            UPDATE patient 
+            SET stillsick = 0 
+            WHERE stillsick = 1 
+            AND time <= DATETIME('now', '-24 hours')
+        `;
+
+        db.run(sql, [], function (err) {
+            if (err) {
+                console.log(`[patientModel] Auto-heal error: ${err}`);
+                reject(err);
+            } else {
+                if (this.changes > 0) {
+                    console.log(`[patientModel] Auto-healed ${this.changes} patients (older than 24h).`);
+                }
+                resolve(this.changes);
+            }
+        });
+    });
+}

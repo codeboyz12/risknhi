@@ -37,13 +37,14 @@ exports.dashboard = () => {
     return new Promise((resolve, reject) => {
         const sql = `
             SELECT 
-                p.buildingID,
+                b.buildingID,
                 b.building_name,
-                COUNT(*) AS total
-            FROM patient p
-            JOIN building b ON p.buildingID = b.buildingID
-            WHERE p.stillsick = TRUE
-            GROUP BY p.buildingID
+                COUNT(p.patientID) AS total
+            FROM building b
+            LEFT JOIN patient p 
+                ON b.buildingID = p.buildingID 
+                AND p.stillsick = TRUE
+            GROUP BY b.buildingID, b.building_name
             ORDER BY total DESC;
         `;
 
