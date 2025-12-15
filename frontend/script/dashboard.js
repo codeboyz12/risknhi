@@ -52,6 +52,7 @@ const initial = async () => {
     const profile = localStorage.getItem("profile");
     const sickbtn = document.getElementById("imSick");
     const finebtn = document.getElementById("imFine");
+    const usernameLabel = document.getElementById("usernameLabel");
     setupPopupButtons()
 
     if( profile === null ){
@@ -59,6 +60,7 @@ const initial = async () => {
         showStatusPopup(false);
         showLocationPopup(false);
         showUserStatus(false);
+        usernameLabel.style.display = "none";
         sickbtn.style.display = "block";
         finebtn.style.display = "none";
     } else {
@@ -72,8 +74,20 @@ const initial = async () => {
                 "userID": profileJson.userID
             })
         }).then(r => r.json());
+
+        const response = await fetch('/api/getUsernameById', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "userID": profileJson.userID
+            })
+        }).then(r => r.json());
+        
+        const username = response.data.username;
+
         if(success){
             ft = (ft === 'true');
+            usernameLabel.innerHTML = username;
             if(stillsick) {
                 if(ft){ 
                     showStatusPopup(false); 
@@ -210,7 +224,7 @@ const setupPopupButtons = () => {
             profile.stillsick = false; 
             localStorage.setItem("profile", JSON.stringify(profile));
         }
-        
+
         await userGetWell();
         await showStatusPopup(false);
         await showUserStatus(true);

@@ -53,6 +53,19 @@ exports.selectByUsername = (username) => {
     })
 }
 
+exports.selectUsernameById = (userID) => {
+    return new Promise((resolve, reject) => {
+        db.get('SELECT username FROM auth WHERE userID = ?', [userID], (err, row) => {
+            if (err) {
+                console.log(`[userModel] ${err}`);
+                reject(err);
+            } else {
+                resolve(row);
+            }
+        });
+    });
+}
+
 exports.updatePassword = (userID, password) => {
     return new Promise((resolve, reject) => {
         db.run(

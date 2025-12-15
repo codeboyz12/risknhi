@@ -117,3 +117,32 @@ exports.deleteAccount = async (req, res) => {
         });
     }
 }
+
+exports.selectUsernameById = async (req, res) => {
+    try {
+        const {userID} = req.body;
+        
+        console.log(`[authController] Fetch usersname ID: ${userID}`);
+
+        const username = await authModel.selectUsernameById(userID);
+
+        console.log(username);
+        
+        if( !username ){
+            console.log(`[authController] Get username by ID not found`);
+            res.json({ success: false });
+        }else {
+            console.log(`[authController] Get username by ID`);
+            res.json({
+                success: true,
+                data: username
+            });
+        }
+    } catch(err){
+        console.log(`[authController] Fetch usersname error: ${err}`);
+        res.json({
+            success: false,
+            message: err
+        });
+    }
+}

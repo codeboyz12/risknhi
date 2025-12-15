@@ -123,6 +123,8 @@ header {
 
 .account-icon {
     margin: 0px 20px;
+    display: flex;
+    align-content: center;
 }
 .top-nav a.account-icon {
     order: 1;
