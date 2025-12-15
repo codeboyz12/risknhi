@@ -779,7 +779,7 @@ tr {
     width: 90%;
     max-width: 400px;
     padding: 30px;
-    border-radius: var(--radius-md);
+    border-radius: 10px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     text-align: center;
     position: relative;
