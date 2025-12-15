@@ -95,6 +95,16 @@ const addPatientRecord = async () => {
             // ------------------
 
             localStorage.setItem("profile", JSON.stringify(profileJson));
+            
+            let ft = localStorage.getItem("isFirstTime")
+            if(ft === null || ft === undefined){
+                ft = true
+            };
+
+            localStorage.setItem("isFirstTime", JSON.parse(ft));
+            
+            console.log(`ft = ${ft}`);
+            
             window.location.href = '/';
         } else {
             alert("บันทึกไม่สำเร็จ: " + (response.message || "Error"));

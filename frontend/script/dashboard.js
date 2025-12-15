@@ -46,10 +46,14 @@ const getRiskLevel = total => {
 }
 
 const initial = async () => {
+    let ft = localStorage.getItem("isFirstTime");
+    console.log(`ft = ${ft}`);
+    
     const profile = localStorage.getItem("profile");
     const sickbtn = document.getElementById("imSick");
     const finebtn = document.getElementById("imFine");
-    setupPopupButtons();
+    setupPopupButtons()
+
     if( profile === null ){
         console.log("Not login yet");
         showStatusPopup(false);
@@ -69,9 +73,13 @@ const initial = async () => {
             })
         }).then(r => r.json());
         if(success){
-            showStatusPopup(stillsick);
+            ft = (ft === 'true');
             if(stillsick) {
-                showStatusPopup(true);
+                if(ft){ 
+                    showStatusPopup(false); 
+                    localStorage.setItem("isFirstTime", JSON.parse(false))
+                }
+                else {showStatusPopup(true);}
                 showLocationPopup(false);
                 sickbtn.style.display = "none";
                 finebtn.style.display = "block";
