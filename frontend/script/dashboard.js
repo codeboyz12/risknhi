@@ -193,16 +193,31 @@ const showStatusPopup = async (userIsSick) => {
 
 const setupPopupButtons = () => {
     const modal = document.getElementById('sickStatusPopup');
+    const sickbtn = document.getElementById("imSick");
+    const finebtn = document.getElementById("imFine");
+    const buildingSelect = modal.querySelector('.buildingSelect');
+    const floorSelect = modal.querySelector('.floorSelect');
 
-    const stillSickBtn = modal.querySelector('.btn-red');
-    stillSickBtn.addEventListener('click', () => {
-        window.location.href = '/sickreccord';
-    });
+    const profile = JSON.parse(localStorage.getItem("profile") || "{}");
 
     const getWellBtn = modal.querySelector('.btn-green');
     getWellBtn.addEventListener('click', async () => {
+        const buildingID = buildingSelect.value;
+
+        if (buildingID) {
+            const selectedBuildingName = buildingSelect.options[buildingSelect.selectedIndex].text;
+            profile.at = selectedBuildingName;
+            profile.stillsick = false; 
+            localStorage.setItem("profile", JSON.stringify(profile));
+        }
+        
         await userGetWell();
-        window.location.href = '/';
+        await showStatusPopup(false);
+        await showUserStatus(true);
+        await loadDashboard();
+        finebtn.style.display = "none";
+        sickbtn.style.display = "block";
+        // window.location.href = '/';
     });
 }
 
