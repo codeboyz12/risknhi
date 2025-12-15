@@ -1010,7 +1010,48 @@ tr {
 }
 
 /* =========================================
-    12. RESPONSIVE DESIGN (NEW SECTION)
+    12. FORGOT PASSWORD MODAL STYLE
+   ========================================= */
+#forgotPasswordModal {
+    display: flex;
+}
+
+.admin-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #F9FAFB;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    font-style: normal;
+}
+
+.phone-number {
+    font-size: 24px;
+    font-weight: 800;
+    color: #10B981;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s;
+}
+
+.phone-number:hover {
+    transform: scale(1.05);
+    color: #059669;
+}
+
+.admin-name {
+    font-size: 18px;
+    color: #6B7280;
+    font-weight: 500;
+}
+
+
+/* =========================================
+    13. RESPONSIVE DESIGN
    ========================================= */
 
 /* Tablet / iPad (768px and up) */

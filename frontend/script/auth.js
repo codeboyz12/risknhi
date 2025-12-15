@@ -110,3 +110,23 @@ const logout = async () => {
         alert(response.message);
     }
 }
+
+// [เพิ่มใหม่] ฟังก์ชันจัดการ Modal ลืมรหัสผ่าน
+document.addEventListener("DOMContentLoaded", () => {
+    const fpBtn = document.getElementById("forgotPasswordBtn");
+    const fpModal = document.getElementById("forgotPasswordModal");
+    const closeFpBtn = document.getElementById("closeFpModal");
+
+    if (fpBtn) {
+        fpBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (fpModal) fpModal.style.display = "flex";
+        });
+    }
+
+    if (closeFpBtn) {
+        closeFpBtn.addEventListener("click", () => {
+            if (fpModal) fpModal.style.display = "none";
+        });
+    }
+});
