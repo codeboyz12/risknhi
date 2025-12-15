@@ -11,7 +11,8 @@ const patientModel = require('./models/patientModel');
 const app = express();
 const port = 8000;
 
-const CRON_INTERVAL = 2 * 60 * 1000;
+// const CRON_INTERVAL = 2 * 60 * 1000;
+const CRON_INTERVAL = 45 * 1000;
 
 setInterval(async () => {
     try {

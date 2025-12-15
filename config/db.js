@@ -86,4 +86,6 @@ db.run(patientTable, (err) => {
     }
 })
 
+db.run("PRAGMA foreign_keys = ON;");
+
 module.exports = db;

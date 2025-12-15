@@ -1123,3 +1123,53 @@ tr {
         margin-top: 20px;
     }
 }
+
+/* =========================================
+   SUPPORT DASHBOARD.JS (RISK BADGES)
+   ========================================= */
+
+/* สไตล์พื้นฐานของ Badge ความเสี่ยง */
+.value.badge {
+    display: inline-flex;       /* จัดให้เป็นก้อนแนวนอน */
+    align-items: center;        /* จัดข้อความกึ่งกลางแนวตั้ง */
+    justify-content: center;    /* จัดข้อความกึ่งกลางแนวนอน */
+    padding: 6px 16px;          /* พื้นที่ว่างรอบข้อความ */
+    border-radius: 99px;        /* ทำขอบมนแบบแคปซูล */
+    font-size: 14px;            /* ขนาดตัวหนังสือ */
+    font-weight: 700;           /* ตัวหนา */
+    line-height: 1;             /* ลดระยะห่างบรรทัด */
+    min-width: 80px;            /* ความกว้างขั้นต่ำ */
+    transition: all 0.3s ease;  /* เอฟเฟกต์นุ่มนวลตอนเปลี่ยนสี */
+}
+
+/* -----------------------------------------
+   BACKGROUND COLORS (สีพื้นหลังอ่อน)
+   อ้างอิงจาก JS: bg-*-light
+   ----------------------------------------- */
+.bg-red-light {
+    background-color: #FEF2F2;  /* สีแดงพาสเทล */
+}
+
+.bg-yellow-light {
+    background-color: #FFFBEB;  /* สีเหลืองพาสเทล */
+}
+
+.bg-green-light {
+    background-color: #ECFDF5;  /* สีเขียวพาสเทล */
+}
+
+/* -----------------------------------------
+   TEXT COLORS (สีตัวอักษร)
+   อ้างอิงจาก JS: text-*
+   ----------------------------------------- */
+.text-red {
+    color: #DC2626 !important;  /* แดงเข้ม */
+}
+
+.text-yellow {
+    color: #D97706 !important;  /* ส้มทอง */
+}
+
+.text-green {
+    color: #059669 !important;  /* เขียวเข้ม */
+}
