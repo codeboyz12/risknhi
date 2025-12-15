@@ -116,17 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const fpBtn = document.getElementById("forgotPasswordBtn");
     const fpModal = document.getElementById("forgotPasswordModal");
     const closeFpBtn = document.getElementById("closeFpModal");
+    fpBtn.addEventListener("click", () => {
+        fpModal.style.display = "flex";
+    });
 
-    if (fpBtn) {
-        fpBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            if (fpModal) fpModal.style.display = "flex";
-        });
-    }
-
-    if (closeFpBtn) {
-        closeFpBtn.addEventListener("click", () => {
-            if (fpModal) fpModal.style.display = "none";
-        });
-    }
-});
+    closeFpBtn.addEventListener("click", () => {
+        fpModal.style.display = "none";
+    });
+})

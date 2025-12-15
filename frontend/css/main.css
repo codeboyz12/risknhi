@@ -999,7 +999,7 @@ tr {
 }
 
 #forgotPasswordModal {
-    display: flex;
+    display: none;
 }
 
 .admin-contact {
