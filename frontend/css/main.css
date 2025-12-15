@@ -159,7 +159,7 @@ header {
 }
 
 .logo-icon {
-    display: flex;
+    /* display: flex;
     align-items: center;
     justify-content: center;
     width: 60px;
@@ -170,7 +170,12 @@ header {
     border-radius: 50%;
     border-bottom: none;
     box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-    font-size: 30px;
+    font-size: 30px; */
+    width: 160px;
+    height: 160px;
+    margin-right: 5px;
+    margin-bottom: -30px;
+    object-fit: cover;
 }
 
 .brand-name {
