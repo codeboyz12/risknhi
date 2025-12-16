@@ -81,7 +81,6 @@ const saveProfile = async () => {
         const json = await response.json();
 
         if (json.success) {
-            alert("บันทึกข้อมูลสำเร็จ!");
             window.location.href = "/";
         } else {
             alert("บันทึกข้อมูลไม่สำเร็จ: " + (json.message || "Unknown error"));
@@ -122,8 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const result = await response.json();
 
                 if (result.success) {
-                    alert("บัญชีของคุณถูกลบเรียบร้อยแล้ว");
-                    
+                    alert("บัญชีของคุณถูกลบเรียบร้อยแล้ว");                    
                     // 4. เคลียร์ข้อมูลในเครื่องและดีดออกไปหน้า Login
                     localStorage.clear();
                     window.location.href = '/login'; 

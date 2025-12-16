@@ -359,7 +359,6 @@ const setupApiLocationConfirm = (modalId) => {
                 profile.stillsick = true; 
                 localStorage.setItem("profile", JSON.stringify(profile));
 
-                alert("อัปเดตข้อมูลกับ Server เรียบร้อยแล้ว!");
                 modal.style.display = "none";
                 await showUserStatus(true);
                 await loadDashboard(); 
@@ -412,7 +411,6 @@ const setupLocalLocationConfirm = (modalId) => {
         localStorage.setItem("profile", JSON.stringify(profile));
         // ---------------------------
 
-        alert("บันทึกตำแหน่งลงในเครื่องแล้ว");
         modal.style.display = "none";
 
         // รีเฟรชหน้าจอ UI

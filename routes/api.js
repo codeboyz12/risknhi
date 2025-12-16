@@ -21,6 +21,7 @@ routes.post('/deleteAccount', authController.deleteAccount);
 routes.post('/getUsernameById', authController.selectUsernameById);
 
 routes.post('/addBuilding', buildingController.addBuilding);
+
 routes.post('/addPatient', patientController.addPatient);
 routes.post('/userGetWell', patientController.userGetWell);
 routes.post('/updatePatientLocation', patientController.updatePatientLocation);
