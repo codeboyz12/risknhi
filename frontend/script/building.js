@@ -5,7 +5,7 @@ const fetchBuilding = async () => {
             'Content-Type': 'application/json'
         }
     }
-    const response = await fetch('http://localhost:8000/api/getBuild', payloads);
+    const response = await fetch('/api/getBuild', payloads);
     const json = await response.json();
     if(json.success){
         return json.data;

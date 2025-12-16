@@ -128,10 +128,37 @@ header {
 }
 .top-nav a.account-icon {
     order: 1;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 3px;
+    border: 1px solid #5c5c5c;
+    border-radius: 10px;
+    transition: all 0.3s ease; 
+    background-color: transparent;
+}
+
+.top-nav a.account-icon:hover {
+    background-color: #b1ffcf;
+    border-color: #00C897;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 200, 151, 0.2);
 }
 
 .top-nav a.logout-icon {
     order: 2;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tagline#usernameLabel {
+    margin-left: 6px;
+    margin-right: 6px;
+    color: #000;
 }
 
 .nav-header {
