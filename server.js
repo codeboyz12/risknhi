@@ -6,8 +6,24 @@ const db = require('./config/db');
 const {requireLogin} = require('./middleware/authMiddleware');
 const cookieParser = require('cookie-parser');
 
+const patientModel = require('./models/patientModel');
+
 const app = express();
 const port = 8000;
+const CRON_INTERVAL = 2 * 60 * 1000;
+
+setInterval(async () => {
+    try {
+        // เรียกฟังก์ชันเคลียร์คนป่วย
+        const affectedRows = await patientModel.autoHealOldPatients();
+        
+        // (Optional) แสดง log เพื่อดูว่า cron job ทำงานอยู่
+        console.log(`[Cron] Checked for old patients. Healed: ${affectedRows}`);
+        
+    } catch (err) {
+        console.error(`[Cron] Error running auto-heal: ${err}`);
+    }
+}, CRON_INTERVAL);
 
 app.use(express.json());
 app.use(cookieParser());
