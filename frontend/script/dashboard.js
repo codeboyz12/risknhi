@@ -40,7 +40,7 @@ const loadDashboard = async () => {
 
 // ระดับความเสี่ยง (แก้ได้ตามใจคุณ)
 const getRiskLevel = total => {
-    if (total >= 4) return { text: "สูง", class: "text-red" };
+    if (total >= 3) return { text: "สูง", class: "text-red" };
     if (total >= 2) return { text: "ปานกลาง", class: "text-yellow" };
     return { text: "ต่ำ", class: "text-green" };
 }
